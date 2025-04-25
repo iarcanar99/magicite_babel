@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magicite Babel - แปลภาษาเกมแบบเรียลไทม์</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #060d1a;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f1b47 0%, #1e1745 100%);
+            position: relative;
+        }
+        
+        .card {
+            background-color: rgba(18, 24, 35, 0.8);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+        
+        .feature-icon {
+            background-color: #4f46e5;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.6);
+        }
+        
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338ca;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(30deg);
+            z-index: -1;
+            transition: all 0.8s ease;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+        }
+        
+        .screenshot {
+            border: 2px solid #4f46e5;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.6);
+        }
+        
+        .screenshot::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #6366f1, transparent, #8b5cf6, transparent);
+            background-size: 400% 400%;
+            z-index: -1;
+            border-radius: 0.85rem;
+            animation: glowAnimation 6s ease infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .screenshot:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes glowAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Particle animation */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(99, 102, 241, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Splash screen container */
+        .splash-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .splash-image {
+            max-width: 80%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.8));
+        }
+        
+        .glow-effect {
+            position: relative;
+        }
+        
+        .glow-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .glow-effect:hover::after {
+            opacity: 1;
+        }
+        
+        /* Additional dark overlay for sections */
+        .dark-section {
+            background-color: rgba(5, 10, 20, 0.7);
+            position: relative;
+        }
+        
+        /* Magical glow for cards */
+        .magical-border {
+            position: relative;
+        }
+        
+        .magical-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #6366f1, transparent, #8b5cf6, transparent);
+            background-size: 400% 400%;
+            z-index: -1;
+            border-radius: 1.1rem;
+            animation: borderAnimation 6s ease infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .magical-border:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes borderAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Gallery Wall Layout */
+        .gallery-wall {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, minmax(60px, auto));
+            gap: 16px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.4);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .gallery-item.large-landscape {
+            grid-column: span 8;
+            grid-row: span 3;
+        }
+        
+        .gallery-item.large-portrait {
+            grid-column: span 4;
+            grid-row: span 5;
+        }
+        
+        .gallery-item.medium {
+            grid-column: span 4;
+            grid-row: span 3;
+        }
+        
+        .gallery-item.small {
+            grid-column: span 4;
+            grid-row: span 2;
+        }
+        
+        /* Main splash image styles */
+        .main-splash {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+            background-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-splash-image {
+            width: auto;
+            max-width: 70%;
+            height: auto;
+            filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.9));
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .glow-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(
+                circle at center,
+                rgba(99, 102, 241, 0.5) 0%,
+                rgba(99, 102, 241, 0.2) 40%,
+                transparent 70%
+            );
+            filter: blur(30px);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Splash Section - New Addition -->
+    <div class="main-splash">
+        <div class="glow-aura"></div>
+        <img src="https://i.imgur.com/IxXizBF.jpg" alt="Magicite Babel Splash" class="main-splash-image">
+    </div>
+    
+    <!-- Hero Section -->
+    <header class="hero-gradient py-16 md:py-24">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="lg:w-1/2 mb-10 lg:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">Magicite Babel</h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-indigo-200">แปลภาษาเกมแบบเรียลไทม์ ด้วยเทคโนโลยี AI</h2>
+                    <p class="text-lg md:text-xl mb-6 text-indigo-100">สัมผัสประสบการณ์การเล่นเกมระดับใหม่ด้วย AI แปลภาษาคุณภาพสูงราวกับดูซีรีส์เน็ทฟลิกซ์ที่มีซับไตเติลคุณภาพเยี่ยม ที่เข้าใจบริบทและคาแรกเตอร์ของตัวละครได้อย่างลึกซึ้ง ไม่ใช่แค่แปลคำต่อคำ แต่เข้าใจคาแรกเตอร์ตัวละครด้วยระบบ NPC Manager ล้ำสมัย</p>
+                    
+                    <p class="text-lg md:text-xl mb-6 text-indigo-100"><span class="text-indigo-300 font-semibold">Magicite Babel</span> สร้างโดยคนไทยผู้หลงใหลในเกมและซีรีส์ Final Fantasy โดยมีจุดประสงค์เพื่อทลายกำแพงภาษาให้ผู้เล่นชาวไทยได้ดื่มด่ำกับเนื้อเรื่องอันลึกซึ้ง โดยเฉพาะอย่างยิ่งในเกม FFXIV ที่ใช้ภาษาโบราณและซับซ้อน แม้จะมีความรู้ภาษาอังกฤษพื้นฐาน ก็ยังไม่เพียงพอที่จะเข้าใจและซึมซับอรรถรสทั้งหมดได้อย่างสมบูรณ์</p>
+                    
+                    <p class="text-lg md:text-xl mb-8 text-indigo-100">รองรับโมเดล AI ชั้นนำทั้ง Gemini, GPT และ Claude พร้อมฟีเจอร์ Hover Translation และ Preset อัจฉริยะที่ช่วยให้การแปลราบรื่น รวดเร็ว อ่านบทสนทนาที่เคยสับสนด้วยการแปลที่เป็นธรรมชาติเหมือนคนไทยเขียนเอง</p>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#features" class="btn-primary px-8 py-3 rounded-full font-medium text-lg shadow-lg">ดูฟีเจอร์</a>
+                        <a href="#download" class="px-8 py-3 rounded-full font-medium text-lg border border-indigo-300 text-indigo-100 hover:bg-indigo-800 transition duration-300 hover:shadow-lg hover:shadow-indigo-500/20">ดาวน์โหลดเลย</a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://i.imgur.com/07pn0QL.jpeg" alt="Magicite Babel Main UI" class="rounded-xl shadow-2xl border-2 border-indigo-500 hover:shadow-indigo-500/50 transition-all duration-300 screenshot">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Features -->
+    <section id="features" class="py-16 md:py-24 dark-section">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">ฟีเจอร์เด่น</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div class="card p-6 magical-border">
+                    <div class="feature-icon">
+                        <i class="fas fa-language text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-200">แปลภาษาแบบเรียลไทม์</h3>
+                    <p class="text-gray-300">ใช้ OCR ดึงข้อความจากหน้าจอเกมและแปลทันทีด้วย AI ขั้นสูง รองรับหลากหลายโมเดล (Gemini, GPT, Claude)</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="feature-icon">
+                        <i class="fas fa-mouse-pointer text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-200">Hover Translation</h3>
+                    <p class="text-gray-300">แปลเมื่อเมาส์ชี้เท่านั้น ไม่ต้องคลิกให้เสียเวลา สะดวกยิ่งขึ้นกับการอ่านข้อความในเกม</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-200">ระบบจัดการ NPC</h3>
+                    <p class="text-gray-300">ปรับแต่งน้ำเสียงและลักษณะการพูดของตัวละครให้เป็นธรรมชาติ เก็บข้อมูลและบุคลิกตัวละครไว้ใช้งานต่อเนื่อง</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-200">ปรับแต่ง UI สูง</h3>
+                    <p class="text-gray-300">เลือกธีม ฟอนต์ ขนาด และตำแหน่งได้ตามต้องการ ปรับความโปร่งใสของพื้นหลังให้เข้ากับเกมของคุณ</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-200">ระบบ Preset อัจฉริยะ</h3>
+                    <p class="text-gray-300">บันทึกพื้นที่แปลและการตั้งค่าเป็นชุด (Preset) เพื่อสลับไปมาได้อย่างง่ายดายและรวดเร็ว</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="feature-icon">
+                        <i class="fas fa-toggle-on text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-200">Toggle Switches</h3>
+                    <p class="text-gray-300">ปุ่มเปิด/ปิดฟีเจอร์ต่างๆ ได้อย่างรวดเร็ว ปรับการใช้งานได้ตามความต้องการในแต่ละช่วงเวลา</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-16 md:py-24 hero-gradient">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">การใช้งานเบื้องต้น</h2>
+            
+            <div class="mt-12 flex flex-col gap-16">
+                <!-- Step 1 -->
+                <div class="step-container">
+                    <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-6 max-w-5xl mx-auto">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-2/5">
+                                <h3 class="text-2xl font-semibold text-indigo-200 mb-4 flex items-center">
+                                    <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3 shadow-lg shadow-indigo-500/40">1</span>
+                                    เลือกพื้นที่ที่ต้องการแปล
+                                </h3>
+                                <p class="text-gray-300">เลือกพื้นที่ที่ต้องการให้โปรแกรมแปลได้แยกตามประเภท เช่น <strong class="text-indigo-200">A</strong> สำหรับส่วนชื่อตัวละคร และ <strong class="text-indigo-200">B</strong> สำหรับส่วนข้อความสนทนา จากนั้นตรวจสอบพื้นที่ที่เลือกด้วยการกด <strong class="text-indigo-200">Show Area</strong> เพื่อดูกรอบสีแดงแสดงพื้นที่ที่เลือก</p>
+                            </div>
+                <div class="order-1 lg:order-2">
+                    <img src="https://i.imgur.com/9UDcjO3.png" alt="Step 1: Select Areas" class="w-full rounded-xl shadow-xl mx-auto screenshot">
+                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step-container">
+                    <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-6 max-w-5xl mx-auto">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="order-1 md:order-2 md:w-2/5">
+                                <h3 class="text-2xl font-semibold text-indigo-200 mb-4 flex items-center">
+                                    <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3 shadow-lg shadow-indigo-500/40">2</span>
+                                    เริ่มการแปล
+                                </h3>
+                                <p class="text-gray-300 mt-3">กดปุ่ม <strong class="text-indigo-200">Start Translation</strong> เพื่อเริ่มให้โปรแกรมแปลภาษาโดยอัตโนมัติ เมื่อตรวจพบข้อความในพื้นที่ที่เลือกไว้ โปรแกรมจะใช้ OCR อ่านข้อความและส่งไปให้ AI แปล</p>
+                                <p class="text-gray-300 mt-3">คุณสามารถกดปุ่ม <strong class="text-indigo-200">W A S D</strong> เพื่อหยุดการแปลชั่วคราวได้ (สามารถตั้งค่าได้ในหน้าตั้งค่า)</p>
+                            </div>
+                            <div class="order-2 md:order-1 md:w-3/5">
+                                <img src="https://i.imgur.com/gq5H0Ua.png" alt="Step 2: Start Translation" class="w-full rounded-lg shadow-xl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step-container">
+                    <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-6 max-w-5xl mx-auto">
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="md:w-2/5">
+                                <h3 class="text-2xl font-semibold text-indigo-200 mb-4 flex items-center">
+                                    <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3 shadow-lg shadow-indigo-500/40">3</span>
+                                    ดูผลการแปล
+                                </h3>
+                                <p class="text-gray-300">ผลการแปลจะแสดงในหน้าต่าง <strong class="text-indigo-200">TUI (Translation UI)</strong> ซึ่งคุณสามารถเปิด-ปิดได้ด้วยปุ่ม <strong class="text-indigo-200">TUI</strong></p>
+                                <p class="text-gray-300 mt-3">คุณสามารถเลือกโหมดต่างๆ เช่น พื้นหลัง+ล็อคตำแหน่ง, ซ่อนพื้นหลัง+ล็อค, หรือพื้นหลัง+ปลดล็อก เพื่อปรับการแสดงผลให้เหมาะกับรูปแบบการเล่นเกมของคุณ</p>
+                                <p class="text-gray-300 mt-3">กดปุ่ม <strong class="text-indigo-200">F</strong> หรือคลิกที่พื้นหลังของหน้าต่างแปลเพื่อบังคับแปลซ้ำได้ทันที</p>
+                            </div>
+                            <div class="md:w-3/5">
+                                <img src="https://i.imgur.com/8xzpsl4.png" alt="Step 3: View Translation" class="w-full rounded-lg shadow-xl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI Showcase - Redesigned -->
+    <section class="py-16 md:py-24 dark-section">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">หน้าตาโปรแกรม</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-12">
+                <!-- Main UI -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">หน้าต่างหลัก</h3>
+                        <p class="text-gray-300 text-lg mb-6">ควบคุมการทำงานพื้นฐาน เลือกพื้นที่แปล เริ่ม/หยุดการแปล และเข้าถึงการตั้งค่าต่างๆ ดีไซน์ที่เรียบง่ายแต่ครบครัน ให้คุณเข้าถึงฟีเจอร์ต่างๆ ได้อย่างรวดเร็ว</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/07pn0QL.jpeg" alt="Main UI" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Translation Result -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">ผลลัพธ์การแปล</h3>
+                        <p class="text-gray-300 text-lg mb-6">แสดงผลการแปลจาก AI พร้อมระบุชื่อตัวละครและข้อความที่แปลแล้วอย่างชัดเจน ด้วยระบบ NPC Manager ที่ทำให้เข้าใจคาแรกเตอร์ทำให้การแปลมีความสม่ำเสมอและถูกต้องตามบริบท</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/zqFfYIi.jpeg" alt="Translation Result" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Control UI -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">Control UI</h3>
+                        <p class="text-gray-300 text-lg mb-6">ควบคุมการสลับพื้นที่และ preset ต่างๆ พร้อมปุ่ม Force เพื่อแปลซ้ำเมื่อต้องการ ใช้งานง่ายด้วยฟีเจอร์ Hover เพียงชี้เมาส์ที่พื้นที่ Preset (1-3) โปรแกรมจะสลับให้อัตโนมัติ</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/QyGVJ1p.jpeg" alt="Control UI" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Translation History -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">ประวัติการแปล</h3>
+                        <p class="text-gray-300 text-lg mb-6">บันทึกทุกบทสนทนาที่แปลแล้วตั้งแต่เริ่มต้นใช้งาน ช่วยให้ย้อนกลับไปดูบทสนทนาก่อนหน้าได้ สะดวกสำหรับการติดตามเนื้อเรื่องที่ซับซ้อน โดยเฉพาะในเกม RPG ที่มีเนื้อเรื่องยาว</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/u7Aog1W.jpeg" alt="Translation History" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NPC Manager -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">NPC Manager</h3>
+                        <p class="text-gray-300 text-lg mb-6">จัดการข้อมูลและบุคลิกของตัวละครเพื่อให้การแปลเป็นธรรมชาติยิ่งขึ้น กำหนดสไตล์การแปลเฉพาะตัวละคร นำเสนอคาแรกเตอร์ที่สอดคล้องกับต้นฉบับ ทำให้การแปลราวกับดูซีรีส์ที่มีซับไตเติลคุณภาพเยี่ยม</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/nSZiwvu.jpeg" alt="NPC Manager" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">การตั้งค่า</h3>
+                        <p class="text-gray-300 text-lg mb-6">ปรับแต่งพารามิเตอร์ของ AI, OCR, การแสดงผล และการทำงานของโปรแกรมอย่างละเอียด ตั้งค่า API Key จากผู้ให้บริการ AI ต่างๆ ได้ (แนะนำ Gemini เพราะเร็วและฟรี) ปรับแต่ง prompt เพื่อให้ได้ผลลัพธ์ที่ดีที่สุดสำหรับเกมแต่ละประเภท</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/38SVvvQ.jpeg" alt="Settings" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Theme Customization -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">ปรับแต่งธีม</h3>
+                        <p class="text-gray-300 text-lg mb-6">เลือกสีและรูปแบบของ UI ให้เข้ากับธีมของเกมและความชอบส่วนตัว ปรับแต่งสีได้ตามต้องการ เพิ่มความโปร่งใสของพื้นหลัง และอื่นๆ อีกมากมาย มีธีมให้เลือกหลากหลายหรือสร้างธีมใหม่เองได้</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/m391bF3.jpeg" alt="Theme Customization" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Font Settings -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">จัดการฟอนต์</h3>
+                        <p class="text-gray-300 text-lg mb-6">เลือกฟอนต์และปรับขนาดตัวอักษรสำหรับการแสดงผลที่เหมาะสมที่สุด นำเข้าฟอนต์เพิ่มเติมได้อย่างง่ายดาย มาพร้อมกับฟอนต์ไทยยอดนิยมหลากหลายให้เลือกใช้ได้ทันที รองรับฟอนต์ต่างประเทศด้วย</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/re9jKb2.jpeg" alt="Font Settings" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mini Mode -->
+                <div class="card p-6 magical-border flex flex-col">
+                    <div class="flex-grow mb-4">
+                        <h3 class="text-2xl font-bold mb-3 text-indigo-200">โหมดมินิ</h3>
+                        <p class="text-gray-300 text-lg mb-6">ใช้งานในรูปแบบย่อเพื่อให้รบกวนหน้าจอเกมน้อยที่สุด สลับกลับไปโหมดเต็มได้ง่าย พร้อมปุ่มควบคุมที่จำเป็นในรูปแบบกะทัดรัด ไม่เกะกะหน้าจอแต่ยังคงฟังก์ชันสำคัญไว้ครบถ้วน</p>
+                    </div>
+                    <div class="thumbnail-container flex justify-center">
+                        <div class="relative overflow-hidden rounded-lg border-2 border-indigo-500 shadow-lg w-40 h-32 image-container">
+                            <img src="https://i.imgur.com/7D0Oodo.jpeg" alt="Mini Mode" class="w-full h-full object-contain hover:scale-110 transition-transform cursor-pointer zoomable-image">
+                            <div class="absolute bottom-1 right-1 bg-indigo-600 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <i class="fas fa-search-plus text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Features - Replaced with Patch Notes -->
+    <section class="py-16 md:py-24 hero-gradient">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">อัปเดตล่าสุด</h2>
+            
+            <div class="max-w-4xl mx-auto mt-12 bg-slate-800 bg-opacity-80 p-8 rounded-xl shadow-xl border border-indigo-500">
+                <div class="flex items-center justify-between mb-6 border-b border-indigo-500 pb-4">
+                    <h3 class="text-2xl font-semibold text-indigo-200">🚀 Patch Notes - เมษายน 2025</h3>
+                    <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">เวอร์ชั่น 7.5</span>
+                </div>
+                
+                <div class="mb-8">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                            <i class="fas fa-star text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-indigo-200">Hover Translation (20 เมษายน)</h4>
+                            <p class="text-gray-300">แค่เอาเมาส์ไปชี้ที่พื้นที่ของ Preset หลัก (1-3) โปรแกรมก็จะสลับไปใช้ Preset นั้นให้เลย! สะดวกสุดๆ เวลาเจอหน้าจอที่มีหลายส่วน</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                            <i class="fas fa-star text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-indigo-200">Toggle Switches (20 เมษายน)</h4>
+                            <p class="text-gray-300">ปุ่มเปิด/ปิดฟีเจอร์ต่างๆ ที่ Control UI ทำให้สลับการตั้งค่าเป็นเรื่องง่าย ไม่ต้องเปิดหน้า Settings บ่อยๆ</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                            <i class="fas fa-bolt text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-indigo-200">Gemini 2.0 Flash (16 เมษายน)</h4>
+                            <p class="text-gray-300">เพิ่มพลังแปลด้วยโมเดลใหม่ล่าสุด Gemini-2.0-Flash เร็วขึ้น คุณภาพดีขึ้นกว่าเดิม!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-4">
+                        <div class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1 mr-4">
+                            <i class="fas fa-mouse-pointer text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-indigo-200">Hover-to-Force (16 เมษายน)</h4>
+                            <p class="text-gray-300">ฟีเจอร์ชี้ค้างเพื่อสั่งแปล ตอนนี้ใช้ได้กับทุกปุ่มที่เกี่ยวกับการ Force Translate</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border-t border-indigo-500 pt-6">
+                    <h3 class="text-xl font-semibold text-indigo-200 mb-4">การปรับปรุงเพิ่มเติม</h3>
+                    <ul class="list-disc pl-6 text-gray-300 space-y-2">
+                        <li>ปรับปรุง Control Panel ให้มีหน้าตาดูดีขึ้น ปุ่ม Preset กับส่วนควบคุม CPU ใช้งานง่ายกว่าเดิม</li>
+                        <li>แก้บั๊กบันทึก Preset ที่ตั้งชื่อ Custom Preset แล้วบันทึกไม่ได้</li>
+                        <li>ปรับปรุงหน้าตั้งค่า Model ให้มีหน้าตา UI/UX ดีขึ้น ปุ่ม Apply ชัดเจน</li>
+                        <li>แก้ปัญหาการตรวจสอบ Unsaved Changes ในระบบ Preset</li>
+                        <li>ปรับปรุงการป้องกัน Race Condition ใน Hover Translation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-8">
+                <a href="#" class="text-indigo-300 hover:text-white transition-colors duration-300 flex items-center">
+                    <span>ดูอัปเดตทั้งหมด</span>
+                    <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Support -->
+    <section class="py-16 md:py-24 dark-section">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">รองรับเกม</h2>
+            
+            <div class="mt-12 text-center">
+                <div class="inline-block bg-indigo-600 text-white px-6 py-4 rounded-lg text-lg font-semibold mb-10 shadow-lg shadow-indigo-500/40">แฟนพันธุ์แท้ FFXIV</div>
+                
+                <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">Magicite Babel ถูกพัฒนาขึ้นโดยเฉพาะสำหรับแฟนเกม Final Fantasy XIV แต่สามารถใช้งานได้กับเกมอื่นๆ อีกมากมาย</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <div class="bg-indigo-900 bg-opacity-30 p-4 rounded-lg border border-indigo-500 shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/40 transition-all">
+                        <div class="text-indigo-300 font-semibold">FFXIV</div>
+                    </div>
+                    <div class="bg-indigo-900 bg-opacity-30 p-4 rounded-lg border border-indigo-500 shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/40 transition-all">
+                        <div class="text-indigo-300 font-semibold">Genshin Impact</div>
+                    </div>
+                    <div class="bg-indigo-900 bg-opacity-30 p-4 rounded-lg border border-indigo-500 shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/40 transition-all">
+                        <div class="text-indigo-300 font-semibold">Granblue Fantasy</div>
+                    </div>
+                    <div class="bg-indigo-900 bg-opacity-30 p-4 rounded-lg border border-indigo-500 shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/40 transition-all">
+                        <div class="text-indigo-300 font-semibold">Persona</div>
+                    </div>
+                    <div class="bg-indigo-900 bg-opacity-30 p-4 rounded-lg border border-indigo-500 shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/40 transition-all">
+                        <div class="text-indigo-300 font-semibold">Tales Series</div>
+                    </div>
+                    <div class="bg-indigo-900 bg-opacity-30 p-4 rounded-lg border border-indigo-500 shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/40 transition-all">
+                        <div class="text-indigo-300 font-semibold">และอื่นๆ อีกมากมาย</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials/Reviews -->
+    <section class="py-16 md:py-24 hero-gradient">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">เสียงจากผู้ใช้</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="card p-6 magical-border">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="ml-2 text-gray-400">5.0</div>
+                    </div>
+                    <p class="text-gray-300 mb-4">"เล่น FFXIV มา 3 ปี เพิ่งเข้าใจเนื้อเรื่องจริงๆ ก็ตอนใช้ Magicite Babel นี่แหละ การแปลแม่นมาก และปรับแต่งได้ตามใจชอบ"</p>
+                    <p class="font-semibold text-indigo-200">- Warrior of Light</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="ml-2 text-gray-400">5.0</div>
+                    </div>
+                    <p class="text-gray-300 mb-4">"ใช้กับ Granblue Fantasy ได้ดีมาก ชอบที่สามารถตั้งค่า NPC แต่ละตัวได้ ทำให้บทสนทนามีชีวิตชีวากว่าที่เคย"</p>
+                    <p class="font-semibold text-indigo-200">- Sky Dweller</p>
+                </div>
+                
+                <div class="card p-6 magical-border">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="ml-2 text-gray-400">4.5</div>
+                    </div>
+                    <p class="text-gray-300 mb-4">"ประทับใจกับ Hover Translation มาก แค่ชี้เมาส์ก็แปลได้ทันที ไม่ต้องหยุดเล่นเกม เวอร์ชั่นล่าสุดเร็วและแม่นยำมากขึ้น"</p>
+                    <p class="font-semibold text-indigo-200">- Gamer007</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download -->
+    <section id="download" class="py-16 md:py-24 dark-section">
+        <div class="container mx-auto px-4 md:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">พร้อมจะเปลี่ยนประสบการณ์เกมของคุณแล้วหรือยัง?</h2>
+            <p class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto">ดาวน์โหลด Magicite Babel เวอร์ชั่นล่าสุดและเริ่มต้นสัมผัสเนื้อเรื่องเกมที่คุณรักได้ลึกซึ้งยิ่งขึ้น</p>
+            
+            <div class="bg-slate-800 bg-opacity-80 p-8 rounded-xl max-w-2xl mx-auto border border-indigo-500 shadow-lg shadow-indigo-500/20">
+                <div class="text-left mb-6">
+                    <div class="text-xl font-semibold text-indigo-200 mb-2">เวอร์ชั่นล่าสุด: 7.5 BETA (18 เมษายน 2025)</div>
+                    <div class="text-gray-300">
+                        <span class="font-medium">อัปเดตล่าสุด:</span> Hover Translation, Toggle Switches, ปรับปรุงการตรวจจับ Unsaved Changes
+                    </div>
+                    <div class="mt-4 text-indigo-100">
+                        <p>💡 <span class="font-medium">โปรแกรมนี้อยู่ในช่วงทดสอบ Beta</span> ยังไม่เปิดให้ใช้งานสาธารณะ แต่เรายินดีให้ผู้สนใจร่วมทดสอบโดยไม่เสียค่าใช้จ่าย</p>
+                        <p class="mt-2">โดยเฉพาะผู้เล่น FFXIV ที่ต้องการสัมผัสเนื้อเรื่องอย่างลึกซึ้ง เราพร้อมแนะนำการติดตั้งและการใช้งานเป็นพิเศษ</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <a href="#" class="btn-primary px-8 py-4 rounded-lg font-medium text-xl shadow-lg inline-flex items-center">
+                        <i class="fas fa-download mr-2"></i>
+                        ขอเข้าร่วมทดสอบ
+                    </a>
+                    
+                    <div class="flex items-center bg-indigo-900 bg-opacity-50 rounded-lg px-4 py-3 border border-indigo-400">
+                        <i class="fab fa-discord text-2xl text-indigo-300 mr-3"></i>
+                        <div>
+                            <div class="text-sm text-indigo-200">ติดต่อผู้พัฒนา</div>
+                            <div class="flex items-center">
+                                <span id="discord-username" class="text-white font-medium">iarcanar#0</span>
+                                <button id="copy-discord" class="ml-2 text-indigo-300 hover:text-white transition-colors p-1" title="คัดลอย Discord ID">
+                                    <i class="fas fa-copy text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-gray-400 text-sm">สนับสนุน Windows 10/11 (64-bit)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold text-indigo-300 mb-2">Magicite Babel</h2>
+                    <p class="text-gray-400">เครื่องมือแปลภาษาเกมแบบเรียลไทม์</p>
+                    <div class="flex items-center mt-3">
+                        <i class="fab fa-discord text-indigo-400 mr-2"></i>
+                        <span id="discord-username-footer" class="text-gray-400">iarcanar#0</span>
+                        <button id="copy-discord-footer" class="ml-2 text-gray-500 hover:text-indigo-300 transition-colors p-1" title="คัดลอย Discord ID">
+                            <i class="fas fa-copy text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6">
+                    <a href="#features" class="text-gray-300 hover:text-indigo-300 transition">ฟีเจอร์</a>
+                    <a href="#" class="text-gray-300 hover:text-indigo-300 transition">คู่มือการใช้งาน</a>
+                    <a href="#" class="text-gray-300 hover:text-indigo-300 transition">อัปเดต</a>
+                    <a href="#download" class="text-gray-300 hover:text-indigo-300 transition">ดาวน์โหลด</a>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400">© 2025 Magicite Babel - พัฒนาโดย jarcanar - สงวนลิขสิทธิ์</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Particles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles-container');
+            const particleCount = 40;
+            
+            // First add a general animation keyframe for all particles
+            const styleElement = document.createElement('style');
+            styleElement.innerHTML = `
+                @keyframes float {
+                    0% { transform: translate(0, 0); }
+                    25% { transform: translate(var(--tx1), var(--ty1)); }
+                    50% { transform: translate(var(--tx2), var(--ty2)); }
+                    75% { transform: translate(var(--tx3), var(--ty3)); }
+                    100% { transform: translate(0, 0); }
+                }
+            `;
+            document.head.appendChild(styleElement);
+            
+            // Create particles
+            for (let i = 0; i < particleCount; i++) {
+                createParticle();
+            }
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Set random properties
+                const size = Math.random() * 4 + 1;
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                const opacity = Math.random() * 0.5 + 0.2;
+                const duration = Math.random() * 40 + 20;
+                const delay = Math.random() * 10;
+                
+                // Define random translations for animation
+                const tx1 = Math.random() * 100 - 50;
+                const ty1 = Math.random() * 100 - 50;
+                const tx2 = Math.random() * 200 - 100;
+                const ty2 = Math.random() * 200 - 100;
+                const tx3 = Math.random() * 100 - 50;
+                const ty3 = Math.random() * 100 - 50;
+                
+                // Set CSS properties
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}px`;
+                particle.style.top = `${posY}px`;
+                particle.style.opacity = opacity;
+                particle.style.boxShadow = `0 0 ${size * 2}px rgba(99, 102, 241, ${opacity})`;
+                
+                // Set animation variables
+                particle.style.setProperty('--tx1', `${tx1}px`);
+                particle.style.setProperty('--ty1', `${ty1}px`);
+                particle.style.setProperty('--tx2', `${tx2}px`);
+                particle.style.setProperty('--ty2', `${ty2}px`);
+                particle.style.setProperty('--tx3', `${tx3}px`);
+                particle.style.setProperty('--ty3', `${ty3}px`);
+                
+                // Apply animation
+                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                // Append to container
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Handle window resize (add only one event listener)
+            window.addEventListener('resize', function() {
+                // Clear existing particles
+                particlesContainer.innerHTML = '';
+                
+                // Create new particles
+                for (let i = 0; i < particleCount; i++) {
+                    createParticle();
+                }
+            });
+        });
+    </script>
+    
+    <!-- Add Image Zoom Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center hidden">
+        <div class="relative max-w-4xl max-h-screen p-2">
+            <img id="modalImage" src="" alt="Zoomed Image" class="max-h-[90vh] max-w-full">
+            <button id="closeModal" class="absolute top-4 right-4 text-white bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center hover:bg-indigo-700 transition">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Add additional styles -->
+    <style>
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .zoomable-image {
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container:hover .zoomable-image {
+            transform: scale(1.05);
+        }
+        
+        .image-container::after {
+            content: '\f00e';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(79, 70, 229, 0.8);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .image-container:hover::after {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .image-container::after {
+                opacity: 0.8;
+            }
+        }
+    </style>
+    
+    <!-- Image Zoom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.getElementById('closeModal');
+            const zoomableImages = document.querySelectorAll('.zoomable-image');
+            
+            // Open modal on image click
+            zoomableImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    modal.classList.remove('hidden');
+                    modalImg.src = this.src;
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                });
+            });
+            
+            // Close modal
+            closeBtn.addEventListener('click', function() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = ''; // Re-enable scrolling
+            });
+            
+            // Close when clicking outside the image
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+
+    <!-- Add Discord copy functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Discord copy functionality
+            const discordId = "660832858260111362";
+            const copyButtons = document.querySelectorAll('#copy-discord, #copy-discord-footer');
+            
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    navigator.clipboard.writeText(discordId).then(function() {
+                        // Change icon temporarily to show success
+                        const icon = button.querySelector('i');
+                        const originalClass = icon.className;
+                        icon.className = 'fas fa-check text-green-400';
+                        
+                        // Show tooltip or some visual feedback
+                        button.setAttribute('title', 'คัดลอยแล้ว!');
+                        
+                        // Reset after 2 seconds
+                        setTimeout(function() {
+                            icon.className = originalClass;
+                            button.setAttribute('title', 'คัดลอย Discord ID');
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
