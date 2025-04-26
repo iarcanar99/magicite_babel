@@ -409,6 +409,201 @@
         .feature-icon.toggle {
             background-color: #8b5cf6; /* สีม่วง */
         }
+
+        /* จัดการให้ modal แสดงผลดีบนหน้าจอทุกขนาด */
+        @media (max-height: 700px) {
+            #patchNotesModal .max-h-\[90vh\] {
+                max-height: 85vh;
+            }
+        }
+        
+        /* ทำให้หัวข้อ sticky และอยู่ด้านบนเสมอ */
+        #patchNotesModal .sticky {
+            position: sticky;
+            top: 0;
+            background-color: #1e293b;
+            z-index: 10;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            width: 100%;
+            position: relative;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide img {
+            width: 100%;
+            object-fit: cover;
+            max-height: 70vh;
+        }
+        
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.8);
+            padding: 1rem;
+            color: white;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(15, 23, 42, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .prev {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+        
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        .prev:hover, .next:hover {
+            background-color: rgba(79, 70, 229, 0.8);
+        }
+        
+        .thumbnails-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            background-color: rgba(15, 23, 42, 0.9);
+        }
+        
+        .thumbnail {
+            cursor: pointer;
+            position: relative;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail.active {
+            border-color: rgb(99, 102, 241);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.5);
+        }
+        
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .thumbnail img {
+            height: 60px;
+            width: auto;
+            object-fit: cover;
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+        
+        .thumbnail:hover img {
+            transform: scale(1.05);
+        }
+        
+        .thumbnail-text {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgb(199, 210, 254);
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .thumbnail:hover .thumbnail-text {
+            opacity: 1;
+            bottom: -20px;
+        }
+        
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 0.5s;
+        }
+        
+        @keyframes fade {
+            from {
+                opacity: 0.4;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Miqo'te Wiggle Animation */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(3deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        .miqote-icon {
+            position: relative; /* Changed from absolute to relative */
+            width: auto; /* Let the inline style handle width */
+            height: auto;
+            animation: wiggle 0.4s ease-in-out infinite;
+            animation-play-state: paused;
+            transform-origin: bottom center;
+            z-index: 5;
+            vertical-align: middle; /* Better alignment with text */
+        }
+
+        /* Remove specific positioning for Step 1 since we moved the icon */
+        /* .step1-miqote class is no longer needed */
+        
+        .miqote-icon:hover {
+            animation-play-state: running;
+        }
+
+        /* Add a delay class to trigger animation periodically */
+        .miqote-icon.animate-now {
+             animation-play-state: running;
+        }
+
+        /* How it works section adjustments */
+        #how-to-use .step-container h3 {
+            font-size: 1.75rem; /* Increased heading size */
+        }
+
+        #how-to-use .step-container p {
+            font-size: 1.1rem; /* Increased paragraph size */
+            line-height: 1.7; /* Adjusted line height for readability */
+        }
     </style>
 </head>
 <body>
@@ -446,7 +641,85 @@
         </div>
     </header>
 
-    <!-- Main Features -->
+    <!-- Adding new Slideshow Section before Features -->
+    <section class="py-16 md:py-24 dark-section">
+        <div class="container mx-auto px-4 md:px-8">
+            <h2 class="text-2xl md:text-3xl font-semibold text-center text-indigo-200 mb-8">กระบวนการประมวลผล และแปลภาษาอัตโนมัติ</h2>
+            <p class="text-center text-gray-300 text-lg mb-10 max-w-4xl mx-auto">ระบบประมวลผลชั้นสูงที่ทำงานร่วมกับฐานข้อมูลและ AI เพื่อแสดงคำแปลที่แม่นยำในเวลาไม่ถึงวินาที ด้วยการตรวจจับข้อความ OCR และแปลให้เป็นธรรมชาติผ่านการจัดการบริบทแบบอัจฉริยะ</p>
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Slideshow Container -->
+                <div class="relative rounded-xl overflow-hidden shadow-2xl">
+                    <!-- Main Slideshow -->
+                    <div class="slideshow-container relative">
+                        <!-- Slide 1 (Main) -->
+                        <div class="slide fade active">
+                            <img src="https://i.imgur.com/39hzKlT.jpeg" alt="Magicite Babel" class="w-full h-auto">
+                        </div>
+                        
+                        <!-- Slide 2 -->
+                        <div class="slide fade">
+                            <img src="https://i.imgur.com/c2f8SwT.jpeg" alt="Customizable background" class="w-full h-auto">
+                            <div class="slide-caption">
+                                <p>แสดงข้อความแปลพร้อมพื้นหลังที่ปรับเปลี่ยนสีได้ตามต้องการ</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3 -->
+                        <div class="slide fade">
+                            <img src="https://i.imgur.com/L0Iz4Gc.jpeg" alt="Smooth translation" class="w-full h-auto">
+                            <div class="slide-caption">
+                                <p>ซ่อนพื้นหลังได้ตลอดเวลาเพื่อไม่ให้บดบังทัศนียภาพ</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4 -->
+                        <div class="slide fade">
+                            <img src="https://i.imgur.com/kF6yh5C.jpeg" alt="Emotional scenes" class="w-full h-auto">
+                            <div class="slide-caption">
+                                <p>ไม่พลาดซีนอารมณ์ที่คุณเฝ้ารอ</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 5 -->
+                        <div class="slide fade">
+                            <img src="https://i.imgur.com/PW7JoxD.jpeg" alt="Translation history" class="w-full h-auto">
+                            <div class="slide-caption">
+                                <p>เปิดดูประวัติการแปลได้ตลอดเวลา</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Next/prev buttons -->
+                        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                    </div>
+                    
+                    <!-- Thumbnails -->
+                    <div class="thumbnails-container flex justify-center space-x-4 py-4 bg-slate-900 bg-opacity-80">
+                        <div class="thumbnail active" onclick="currentSlide(1)">
+                            <img src="https://i.imgur.com/39hzKlT.jpeg" alt="Thumbnail 1" class="h-16 w-auto rounded transition">
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(2)">
+                            <img src="https://i.imgur.com/c2f8SwT.jpeg" alt="Thumbnail 2" class="h-16 w-auto rounded transition">
+                            <p class="thumbnail-text">พื้นหลังปรับแต่งได้</p>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(3)">
+                            <img src="https://i.imgur.com/L0Iz4Gc.jpeg" alt="Thumbnail 3" class="h-16 w-auto rounded transition">
+                            <p class="thumbnail-text">แปลสมูทแม่นยำ</p>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(4)">
+                            <img src="https://i.imgur.com/kF6yh5C.jpeg" alt="Thumbnail 4" class="h-16 w-auto rounded transition">
+                            <p class="thumbnail-text">ไม่พลาดซีนอารมณ์</p>
+                        </div>
+                        <div class="thumbnail" onclick="currentSlide(5)">
+                            <img src="https://i.imgur.com/PW7JoxD.jpeg" alt="Thumbnail 5" class="h-16 w-auto rounded transition">
+                            <p class="thumbnail-text">ดูประวัติการแปล</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="features" class="py-16 md:py-24 dark-section">
         <div class="container mx-auto px-4 md:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">ฟีเจอร์เด่น</h2>
@@ -504,21 +777,27 @@
     </section>
 
     <!-- How It Works -->
-    <section id="how-to-use" class="py-16 md:py-24 hero-gradient">
+    <section id="how-to-use" class="py-16 md:py-24 hero-gradient relative">
+        <!-- Placed Miqo'te icon next to main heading -->
         <div class="container mx-auto px-4 md:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">คู่มือการใช้งาน</h2>
+            <div class="text-center mb-12 relative">
+                <!-- Add image next to the heading with appropriate spacing -->
+                <h2 class="text-3xl md:text-4xl font-bold inline-block section-title text-white">คู่มือการใช้งาน</h2>
+                <img src="https://i.imgur.com/PuEh8Iu.png" alt="มิโคเต้" class="miqote-icon inline-block ml-3 align-top" style="width: 100px; height: auto;">
+            </div>
             
             <div class="mt-12 flex flex-col gap-16">
                 <!-- Step 1 -->
-                <div class="step-container">
+                <div class="step-container relative">
+                    <!-- Removed image from here since it's now by the main heading -->
                     <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-6 max-w-5xl mx-auto">
                         <div class="flex flex-col md:flex-row gap-8 items-center">
                             <div class="md:w-2/5">
                                 <h3 class="text-2xl font-semibold text-indigo-200 mb-4 flex items-center">
                                     <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3 shadow-lg shadow-indigo-500/40">1</span>
-                                    เลือกพื้นที่ที่ต้องการแปล
+                                    เลือกพื้นที่สำหรับการแปล (Area A+B)
                                 </h3>
-                                <p class="text-gray-300">เลือกพื้นที่ที่ต้องการให้โปรแกรมแปลได้แยกตามประเภท เช่น <strong class="text-indigo-200">A</strong> สำหรับส่วนชื่อตัวละคร และ <strong class="text-indigo-200">B</strong> สำหรับส่วนข้อความสนทนา จากนั้นตรวจสอบพื้นที่ที่เลือกด้วยการกด <strong class="text-indigo-200">Show Area</strong> เพื่อดูกรอบสีแดงแสดงพื้นที่ที่เลือก</p>
+                                <p class="text-gray-300">เลือกพื้นที่สำหรับการแปลโดยกำหนด <strong class="text-indigo-200">Area-A</strong> สำหรับส่วนชื่อตัวละคร และ <strong class="text-indigo-200">Area-B</strong> สำหรับส่วนข้อความสนทนา ควรเลือกทั้ง A และ B ร่วมกันเพื่อให้ระบบสามารถแยกชื่อและข้อความได้อย่างถูกต้อง หลังจากเลือกพื้นที่แล้ว ใช้ <strong class="text-indigo-200">Show Area</strong> เพื่อตรวจสอบกรอบพื้นที่ที่เลือก</p>
                             </div>
                 <div class="order-1 lg:order-2">
                     <img src="https://i.imgur.com/9UDcjO3.png" alt="Step 1: Select Areas" class="w-full rounded-xl shadow-xl mx-auto screenshot">
@@ -534,10 +813,10 @@
                             <div class="order-1 md:order-2 md:w-2/5">
                                 <h3 class="text-2xl font-semibold text-indigo-200 mb-4 flex items-center">
                                     <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3 shadow-lg shadow-indigo-500/40">2</span>
-                                    เริ่มการแปล
+                                    เริ่มต้นการแปลและการตั้งค่า Preset
                                 </h3>
-                                <p class="text-gray-300 mt-3">กดปุ่ม <strong class="text-indigo-200">Start Translation</strong> เพื่อเริ่มให้โปรแกรมแปลภาษาโดยอัตโนมัติ เมื่อตรวจพบข้อความในพื้นที่ที่เลือกไว้ โปรแกรมจะใช้ OCR อ่านข้อความและส่งไปให้ AI แปล</p>
-                                <p class="text-gray-300 mt-3">คุณสามารถกดปุ่ม <strong class="text-indigo-200">W A S D</strong> เพื่อหยุดการแปลชั่วคราวได้ (สามารถตั้งค่าได้ในหน้าตั้งค่า)</p>
+                                <p class="text-gray-300 mt-3">กดปุ่ม <strong class="text-indigo-200">Start Translation</strong> เพื่อเริ่มกระบวนการแปลอัตโนมัติ ระบบจะตรวจจับข้อความในพื้นที่ที่กำหนดและส่งไปแปลทันที หากต้องการหยุดการแปลชั่วคราว สามารถกดปุ่ม hotkey (ค่าเริ่มต้นคือ <strong class="text-indigo-200">W A S D</strong>) ที่ตั้งไว้ในหน้าตั้งค่า</p>
+                                <p class="text-gray-300 mt-3">ใช้ <strong class="text-indigo-200">Preset (1-6)</strong> บน Control UI เพื่อบันทึกและสลับระหว่างชุดพื้นที่แปลต่างๆ ได้อย่างรวดเร็ว โดย Preset 1-3 สำหรับการใช้งานหลัก และ Preset 4-6 สำหรับการตั้งค่าแบบกำหนดเอง</p>
                             </div>
                             <div class="order-2 md:order-1 md:w-3/5">
                                 <img src="https://i.imgur.com/gq5H0Ua.png" alt="Step 2: Start Translation" class="w-full rounded-lg shadow-xl">
@@ -553,11 +832,11 @@
                             <div class="md:w-2/5">
                                 <h3 class="text-2xl font-semibold text-indigo-200 mb-4 flex items-center">
                                     <span class="bg-indigo-600 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3 shadow-lg shadow-indigo-500/40">3</span>
-                                    ดูผลการแปล
+                                    การแสดงผลและฟีเจอร์เสริม
                                 </h3>
-                                <p class="text-gray-300">ผลการแปลจะแสดงในหน้าต่าง <strong class="text-indigo-200">TUI (Translation UI)</strong> ซึ่งคุณสามารถเปิด-ปิดได้ด้วยปุ่ม <strong class="text-indigo-200">TUI</strong></p>
-                                <p class="text-gray-300 mt-3">คุณสามารถเลือกโหมดต่างๆ เช่น พื้นหลัง+ล็อคตำแหน่ง, ซ่อนพื้นหลัง+ล็อค, หรือพื้นหลัง+ปลดล็อก เพื่อปรับการแสดงผลให้เหมาะกับรูปแบบการเล่นเกมของคุณ</p>
-                                <p class="text-gray-300 mt-3">กดปุ่ม <strong class="text-indigo-200">F</strong> หรือคลิกที่พื้นหลังของหน้าต่างแปลเพื่อบังคับแปลซ้ำได้ทันที</p>
+                                <p class="text-gray-300">ผลการแปลจะแสดงในหน้าต่าง <strong class="text-indigo-200">TUI (Translation UI)</strong> ซึ่งสามารถเปิด-ปิดได้ด้วยปุ่ม <strong class="text-indigo-200">TUI</strong> ในหน้าต่าง Control UI</p>
+                                <p class="text-gray-300 mt-3">ปรับโหมดการแสดงผลได้หลายรูปแบบ เช่น พื้นหลัง+ล็อคตำแหน่ง, ซ่อนพื้นหลัง+ล็อคตำแหน่ง หรือพื้นหลัง+ปลดล็อก เพื่อปรับให้เหมาะกับรูปแบบการเล่นเกม</p>
+                                <p class="text-gray-300 mt-3">หากต้องการบังคับแปลซ้ำ สามารถ <strong class="text-indigo-200">แตะปุ่ม F</strong> หรือ <strong class="text-indigo-200">คลิกขวา</strong> ที่พื้นหลังของหน้าต่างแปล หรือกดปุ่ม <strong class="text-indigo-200">Force</strong> บนหน้าต่าง Control UI ได้ทันที ดูประวัติการแปลได้ที่ปุ่ม <strong class="text-indigo-200">LOG</strong></p>
                             </div>
                             <div class="md:w-3/5">
                                 <img src="https://i.imgur.com/8xzpsl4.png" alt="Step 3: View Translation" class="w-full rounded-lg shadow-xl">
@@ -1256,6 +1535,98 @@
                     document.body.style.overflow = '';
                 }
             });
+        });
+    </script>
+
+    <!-- Slideshow Javascript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial setup
+            let slideIndex = 1;
+            showSlide(slideIndex);
+            
+            // Make functions globally available
+            window.changeSlide = function(n) {
+                showSlide(slideIndex += n);
+            };
+            
+            window.currentSlide = function(n) {
+                showSlide(slideIndex = n);
+            };
+            
+            function showSlide(n) {
+                const slides = document.querySelectorAll('.slide');
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                
+                // Reset to first slide if beyond bounds
+                if (n > slides.length) {
+                    slideIndex = 1;
+                }
+                if (n < 1) {
+                    slideIndex = slides.length;
+                }
+                
+                // Hide all slides
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove('active');
+                }
+                
+                // Remove active class from all thumbnails
+                for (let i = 0; i < thumbnails.length; i++) {
+                    thumbnails[i].classList.remove('active');
+                }
+                
+                // Show current slide and highlight thumbnail
+                slides[slideIndex - 1].classList.add('active');
+                thumbnails[slideIndex - 1].classList.add('active');
+            }
+            
+            // Open modal on main slide click
+            const slides = document.querySelectorAll('.slide');
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            slides.forEach(slide => {
+                const img = slide.querySelector('img');
+                if (img) {
+                    img.addEventListener('click', function() {
+                        imageModal.classList.remove('hidden');
+                        modalImage.src = this.src;
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    });
+                }
+            });
+            
+            // Keyboard navigation for slideshow
+            document.addEventListener('keydown', function(e) {
+                if (imageModal.classList.contains('hidden')) { // Only if modal is closed
+                    if (e.key === 'ArrowLeft') {
+                        changeSlide(-1);
+                    } else if (e.key === 'ArrowRight') {
+                        changeSlide(1);
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Miqo'te Animation Trigger -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const miqoteIcon = document.querySelector('.miqote-icon');
+            if (miqoteIcon) {
+                // Function to add animation class and remove after animation ends
+                function triggerWiggle() {
+                    miqoteIcon.classList.add('animate-now');
+                    // Remove the class after the animation duration (0.4s)
+                    setTimeout(() => {
+                        miqoteIcon.classList.remove('animate-now');
+                    }, 400); // Duration of the wiggle animation
+                }
+
+                // Trigger animation periodically
+                setInterval(triggerWiggle, 3000); // Trigger every 3 seconds (more frequent)
+            }
         });
     </script>
 </body>
