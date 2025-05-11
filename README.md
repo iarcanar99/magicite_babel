@@ -1,5 +1,7 @@
 ## Magicite Babel (MBB) เป็นโปรแกรมแปลภาษาเกมแบบ Real-time ใช้ OCR ดึงข้อความ, แปลด้วย AI Models (Gemini, GPT, Claude), และแสดงผลบน UI ที่ปรับแต่งได้สูง
 
+* **Main Page**
+* https://iarcanar99.github.io/magicite_babel
 **ฟีเจอร์หลัก:**
 
 * แปลภาษา Real-time จากหน้าจอเกม
