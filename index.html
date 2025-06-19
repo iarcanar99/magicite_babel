@@ -99,6 +99,23 @@
             box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
         }
         
+        .hero-main-image {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .hero-main-image:hover {
+            filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.8));
+        }
+        
+        .program-ui-image {
+            transition: all 0.3s ease;
+        }
+        
+        .program-ui-image:hover {
+            filter: drop-shadow(0 0 25px rgba(99, 102, 241, 0.7));
+        }
+        
         .screenshot {
             border: 2px solid #4f46e5;
             border-radius: 0.75rem;
@@ -635,7 +652,7 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2">
-                    <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750252314/MBB_site_main_ui_oshz4v.png" alt="Magicite Babel Main UI" class="rounded-xl hover:shadow-2xl hover:shadow-indigo-500/30 transition-all duration-300 transform hover:scale-105">
+                    <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750252314/MBB_site_main_ui_oshz4v.png" alt="Magicite Babel Main UI" class="rounded-xl transition-all duration-300 transform hover:scale-105 hero-main-image">
                 </div>
             </div>
         </div>
@@ -806,7 +823,7 @@
                                 <p class="text-gray-300 mt-3 text-sm"><strong class="text-yellow-300">💡 เคล็ดลับ:</strong> เปิด manual-click และ hover area สำหรับการควบคุมที่ยืดหยุ่น ปรับ CPU Limit ตามประสิทธิภาพเครื่อง</p>
                             </div>
                             <div class="md:w-3/5">
-                                <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750318190/guide02_m1aucl.png" alt="Step 1: เลือกพื้นที่เป้าหมายการแปล" class="w-full rounded-xl shadow-xl mx-auto screenshot">
+                                <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750318190/guide02_m1aucl.png" alt="Step 1: เลือกพื้นที่เป้าหมายการแปล" class="w-full rounded-xl shadow-xl mx-auto">
                             </div>
                         </div>
                     </div>
@@ -859,7 +876,16 @@
                                     <li>• <strong class="text-cyan-300">ซ่อนพื้นหลัง+Lock:</strong> โปร่งใส ตำแหน่งคงที่</li>
                                     <li>• <strong class="text-cyan-300">มีพื้นหลัง+Lock:</strong> มีพื้นหลัง ตำแหน่งคงที่</li>
                                 </ul>
-                                <p class="text-gray-300 mt-3 text-sm"><strong class="text-indigo-200">เปลี่ยนสี/ความโปร่งใสพื้นหลังได้</strong> และมีฟีเจอร์ <strong class="text-red-400">F</strong> เพื่อแปลซ้ำ</p>
+                                <p class="text-gray-300 mt-3 text-sm"><strong class="text-indigo-200">เปลี่ยนสี/ความโปร่งใสพื้นหลังได้</strong> และมีฟีเจอร์ <strong class="text-red-400">F (Force)</strong> เพื่อบังคับแปลซ้ำ</p>
+                                <div class="bg-red-900 bg-opacity-40 rounded-lg p-3 mt-3">
+                                    <p class="text-red-300 font-bold text-sm mb-2">🎯 ฟีเจอร์ Force - ใช้ได้หลายทาง:</p>
+                                    <ul class="text-red-200 text-xs space-y-1">
+                                        <li>• <strong>คลิกขวา</strong> บนพื้นหลัง TUI ตำแหน่งใดก็ได้</li>
+                                        <li>• <strong>ปุ่ม F บน TUI:</strong> เปิดโหมด "แตะเมาส์เพื่อแปลซ้ำ" ไม่ต้องคลิก</li>
+                                        <li>• <strong>ปุ่ม FORCE บน Control UI:</strong> กดโดยตรง</li>
+                                        <li>• <strong>ความอิสระ:</strong> เลือกวิธีที่ถนัดในแต่ละสถานการณ์</li>
+                                    </ul>
+                                </div>
                                 <div class="bg-purple-900 bg-opacity-50 rounded-lg p-2 mt-3">
                                     <p class="text-purple-300 font-bold text-sm">NEW!</p>
                                     <p class="text-purple-200 text-xs">เปิด-ปิด การซ่อนข้อความ<br>เมื่อเวลาผ่านไปสักครู่</p>
@@ -887,13 +913,34 @@
                         <div class="lg:w-1/2 flex justify-center">
                             <!-- ภาพหน้าต่างหลัก (ลดขนาด 40% และเอากรอบออก) -->
                             <div class="relative" style="width: 60%;">
-                                <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750258714/MBB_site_MBB_to_mini_kabizi.png" alt="Main UI" class="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer">
+                                <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750258714/MBB_site_MBB_to_mini_kabizi.png" alt="Main UI" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image">
                             </div>
                         </div>
                         <div class="lg:w-1/2 flex flex-col justify-center">
-                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">หน้าต่างหลัก</h3>
-                            <p class="text-gray-300 text-xl mb-6 leading-relaxed">หน้าต่างหลักทำหน้าที่เป็นศูนย์กลางสำหรับเรียกฟีเจอร์อื่นๆ ทั้งหมด และเป็นหน้าต่างสำหรับสั่ง <strong class="text-indigo-300">เริ่ม-หยุดแปล</strong></p>
-                            <p class="text-gray-300 text-xl leading-relaxed">ส่วนการเลือกพื้นที่ จัดการพื้นที่ จัดการ Preset จะอยู่ที่ <strong class="text-indigo-300">Control UI</strong> ทั้งหมด รวมถึงการเข้าถึง <strong class="text-indigo-300">Settings</strong>, <strong class="text-indigo-300">Hover Translation</strong> และสลับไปเป็น <strong class="text-indigo-300">โหมดมินิ</strong> เพื่อประหยัดพื้นที่หน้าจอระหว่างเล่นเกม</p>
+                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">หน้าต่างหลัก & โหมดมินิ</h3>
+                            <p class="text-gray-300 text-xl mb-4 leading-relaxed">ศูนย์กลางการควบคุมหลักที่เชื่อมต่อทุกฟีเจอร์ เป็นจุดเริ่มต้นสำหรับการใช้งานทั้งหมด</p>
+                            
+                            <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                                <h4 class="text-lg font-semibold text-yellow-300 mb-3">🎛️ ปุ่มควบคุมหลัก:</h4>
+                                <ul class="text-gray-300 space-y-2 text-base">
+                                    <li>• <strong class="text-red-400">START:</strong> เริ่ม-หยุดการแปล <span class="text-cyan-300">(hotkey F9)</span></li>
+                                    <li>• <strong class="text-indigo-200">TUI:</strong> เปิด-ปิดหน้าต่างผลการแปล</li>
+                                    <li>• <strong class="text-indigo-200">LOG:</strong> เปิดประวัติการแปลแบบ Chat Bubble</li>
+                                    <li>• <strong class="text-cyan-300">CON:</strong> Control UI ศูนย์ควบคุมพื้นที่และ Preset</li>
+                                    <li>• <strong class="text-indigo-200">MINI:</strong> สลับเป็นโหมดย่อเพื่อประหยัดพื้นที่</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-purple-900 bg-opacity-50 rounded-lg p-3 mb-3">
+                                <h4 class="text-purple-300 font-bold text-base mb-2">✨ ฟีเจอร์พิเศษ:</h4>
+                                <ul class="text-purple-200 text-sm space-y-1">
+                                    <li>• <strong>UI Position Memory:</strong> จำตำแหน่งหน้าต่างทุกตัว</li>
+                                    <li>• <strong>Theme Synchronization:</strong> ธีมเปลี่ยนพร้อมกันทุก UI</li>
+                                    <li>• <strong>Settings & Font Manager:</strong> ปุ่มด้านล่างสำหรับตั้งค่า</li>
+                                </ul>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm italic">💡 โหมดมินิมีไอคอน expand.png สวยงามและความโปร่งใส 90% จำตำแหน่งถาวร</p>
                         </div>
                     </div>
                 </div>
@@ -902,10 +949,51 @@
                 <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="text-center mb-8">
                         <h3 class="text-4xl font-bold mb-6 text-indigo-200">ผลลัพธ์การแปล (TUI)</h3>
-                        <p class="text-gray-300 text-xl mb-6 max-w-4xl mx-auto leading-relaxed">หน้าต่างแสดงผลการแปลจาก AI ที่อ่านง่าย ชัดเจน พร้อมระบุชื่อตัวละคร (ถ้ามี) ด้วยความฉลาดของ <strong class="text-indigo-300">NPC Manager</strong> ที่ช่วยให้การแปลสม่ำเสมอและตรงคาแรกเตอร์<br><br>✨ พิเศษ! ปรับแต่งฟอนต์ได้เต็มที่ ทั้งหน้าตาและขนาด ผ่านฟีเจอร์ <strong class="text-indigo-300">'จัดการฟอนต์'</strong> ในหน้า Settings &gt; FONT ให้เข้ากับสไตล์ของคุณที่สุด</p>
+                        <p class="text-gray-300 text-xl mb-6 max-w-4xl mx-auto leading-relaxed">หน้าต่างแสดงผลการแปลจาก AI ที่อ่านง่าย ชัดเจน พร้อมระบุชื่อตัวละคร (ถ้ามี) ด้วยความฉลาดของ <strong class="text-indigo-300">NPC Manager</strong> ที่ช่วยให้การแปลสม่ำเสมอและตรงคาแรกเตอร์</p>
                     </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                        <!-- ฟีเจอร์การแสดงผล -->
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-cyan-300 mb-3">🎨 การแสดงผล:</h4>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li>• <strong class="text-indigo-300">Font Manager:</strong> ปรับฟอนต์และขนาดได้เต็มที่</li>
+                                <li>• <strong class="text-purple-300">Color Picker:</strong> เลือกสี/ความโปร่งใสพื้นหลัง</li>
+                                <li>• <strong class="text-emerald-300">Lock Modes:</strong> ล็อค-ปลดล็อคตำแหน่ง</li>
+                                <li>• <strong class="text-orange-300">Fade Out:</strong> จางหายอัตโนมัติเมื่อไม่มีข้อความใหม่</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- ฟีเจอร์ Force Translation -->
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-red-300 mb-3">⚡ Force Translation:</h4>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li>• <strong class="text-red-400">คลิกขวา:</strong> บนพื้นหลัง TUI ตำแหน่งใดก็ได้</li>
+                                <li>• <strong class="text-red-400">ปุ่ม F:</strong> เปิดโหมด "แตะเมาส์เพื่อแปลซ้ำ"</li>
+                                <li>• <strong class="text-cyan-300">Control UI:</strong> กดปุ่ม FORCE โดยตรง</li>
+                                <li>• <strong class="text-yellow-300">ความยืดหยุ่น:</strong> เลือกวิธีที่ถนัด</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- โหมดการทำงาน -->
+                        <div class="bg-slate-700 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-indigo-300 mb-3">🔧 โหมดการทำงาน:</h4>
+                            <ul class="text-gray-300 space-y-2 text-sm">
+                                <li>• <strong class="text-cyan-300">มีพื้นหลัง+ปลดล็อค:</strong> ปรับตำแหน่งได้</li>
+                                <li>• <strong class="text-cyan-300">ซ่อนพื้นหลัง+Lock:</strong> โปร่งใส คงที่</li>
+                                <li>• <strong class="text-cyan-300">มีพื้นหลัง+Lock:</strong> มีพื้นหลัง คงที่</li>
+                                <li>• <strong class="text-purple-300">Dynamic Toggle:</strong> สลับโหมดได้ทันที</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
                     <div class="relative max-w-5xl mx-auto">
-                        <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750264969/MBB_site_TUI_pif6w7.png" alt="Translation Result" class="w-full rounded-lg border-2 border-indigo-500 shadow-lg hover:scale-105 transition-transform cursor-pointer">
+                        <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750264969/MBB_site_TUI_pif6w7.png" alt="Translation Result" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image">
+                    </div>
+                    
+                    <div class="mt-6 bg-gradient-to-r from-indigo-900/50 to-purple-900/30 rounded-lg p-4 border border-indigo-400/30">
+                        <h4 class="text-indigo-300 font-bold text-lg mb-2">🎯 การทำงานอัจฉริยะ:</h4>
+                        <p class="text-gray-300 text-base leading-relaxed">ระบบ <strong class="text-yellow-300">Enhanced Speaker Detection 5 ขั้นตอน</strong> ช่วยให้ทุกข้อความมีชื่อผู้พูดที่แม่นยำ พร้อม <strong class="text-indigo-300">Quality Gate System</strong> ป้องกันการหลุดแปล และ <strong class="text-emerald-300">Pronoun Rules</strong> ที่ปรับตามบุคลิกตัวละคร ทำให้การแปลเป็นธรรมชาติเหมือนซับไตเติลมืออาชีพ</p>
                     </div>
                 </div>
 
@@ -913,12 +1001,44 @@
                 <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8 items-center">
                         <div class="lg:w-1/3">
-                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750254335/MBB_site_CON_vjjq1n.png" alt="Control UI" class="w-full rounded-lg border-2 border-indigo-500 shadow-lg hover:scale-105 transition-transform cursor-pointer">
+                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750254335/MBB_site_CON_vjjq1n.png" alt="Control UI" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image">
                         </div>
                         <div class="lg:w-2/3">
-                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">Control UI</h3>
-                            <p class="text-gray-300 text-xl leading-relaxed">แผงควบคุมย่อยสุดเทพ! สลับ <strong class="text-indigo-300">Preset (1-6)</strong> ได้รวดเร็ว, เลือกพื้นที่แปล (A/B/C) สำหรับ <strong class="text-indigo-300">Custom Preset (4-6)</strong>, กด <strong class="text-indigo-300">Force</strong> แปลซ้ำ, เปิด/ปิดโหมดคลิก/ชี้แปล และดูสถานะ CPU</p>
-                            <p class="text-gray-300 text-xl mt-4 leading-relaxed">✨ พิเศษ! มี <strong class="text-yellow-300">Hover-to-Select Preset (1-3)</strong> และ <strong class="text-yellow-300">Hover-to-Force</strong> ด้วยนะ!</p>
+                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">Control UI - ศูนย์ควบคุมทุกฟีเจอร์</h3>
+                            <p class="text-gray-300 text-xl mb-4 leading-relaxed">แผงควบคุมที่รวมฟีเจอร์สำคัญทั้งหมด! ออกแบบมาให้ใช้งานง่าย มีทุกสิ่งที่ต้องการในที่เดียว</p>
+                            
+                            <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                                <h4 class="text-lg font-semibold text-yellow-300 mb-3">🎯 ฟังก์ชันหลัก:</h4>
+                                <ul class="text-gray-300 space-y-2 text-base">
+                                    <li>• <strong class="text-indigo-300">Preset (1-6):</strong> สลับชุดการตั้งค่าได้รวดเร็ว</li>
+                                    <li>• <strong class="text-indigo-300">Area A/B/C:</strong> เลือกและกำหนดพื้นที่แปล</li>
+                                    <li>• <strong class="text-red-400">FORCE:</strong> บังคับแปลซ้ำทันที</li>
+                                    <li>• <strong class="text-emerald-300">SAVE/LOAD:</strong> บันทึกและโหลด Preset</li>
+                                    <li>• <strong class="text-orange-300">SHOW/HIDE:</strong> แสดง-ซ่อนพื้นที่ที่เลือก</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-emerald-900 bg-opacity-40 rounded-lg p-3 mb-3">
+                                <h4 class="text-emerald-300 font-bold text-base mb-2">🔒 System Presets (1-3) มีข้อจำกัดอัจฉริยะ:</h4>
+                                <ul class="text-emerald-200 text-sm space-y-1">
+                                    <li>• <strong>Preset 1 (Dialog):</strong> จำกัดให้ใช้เฉพาะ Area A+B</li>
+                                    <li>• <strong>Preset 2 (Lore):</strong> จำกัดให้ใช้เฉพาะ Area C</li>
+                                    <li>• <strong>Preset 3 (Choice):</strong> จำกัดให้ใช้เฉพาะ Area A+B</li>
+                                    <li>• <strong>Preset 4-6 (Custom):</strong> ไร้ขีดจำกัด ใช้ได้ทุก Area</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-purple-900 bg-opacity-50 rounded-lg p-3 mb-3">
+                                <h4 class="text-purple-300 font-bold text-base mb-2">✨ ฟีเจอร์ขั้นสูง:</h4>
+                                <ul class="text-purple-200 text-sm space-y-1">
+                                    <li>• <strong>Modern Tooltips:</strong> ชี้เมาส์เพื่อดูคำอธิบายทุกปุ่ม</li>
+                                    <li>• <strong>CPU Limit:</strong> ปรับตามประสิทธิภาพเครื่อง</li>
+                                    <li>• <strong>Toggle Switches:</strong> เปิด-ปิด manual-click และ hover area</li>
+                                    <li>• <strong>RESET Button:</strong> รีเซ็ตพิกัดทั้งระบบ (คลิกค้าง 3 วินาที)</li>
+                                </ul>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm italic">💡 มีขอบโค้งมนสวยงาม ระบบป้องกันการกดผิด และ Rounded Corners UI เหมือน MBB</p>
                         </div>
                     </div>
                 </div>
@@ -926,12 +1046,26 @@
                 <!-- ประวัติการแปล -->
                 <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8 items-center">
-                        <div class="lg:w-1/3" style="width: 60%;">
-                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750254336/MBB_site_LOG_fgzrfy.png" alt="Translation History" class="w-full rounded-lg border-2 border-indigo-500 shadow-lg hover:scale-105 transition-transform cursor-pointer">
+                        <div class="lg:w-1/3" style="width: 30%;">
+                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750254336/MBB_site_LOG_fgzrfy.png" alt="Translation History" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image">
                         </div>
                         <div class="lg:w-2/3 flex flex-col justify-center">
-                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">ประวัติการแปล</h3>
-                            <p class="text-gray-300 text-xl leading-relaxed">ไม่พลาดทุกบทสนทนา! หน้าต่างนี้จะบันทึก <strong class="text-indigo-300">Log การแปลทั้งหมด</strong> ตั้งแต่เริ่มเปิดโปรแกรม ช่วยให้ย้อนกลับไปอ่านเนื้อเรื่องหรือบทพูดที่อาจจะพลาดไปได้ง่ายๆ</p>
+                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">ประวัติการแปล (LOG)</h3>
+                            <p class="text-gray-300 text-xl leading-relaxed mb-4">ไม่พลาดทุกบทสนทนา! หน้าต่างนี้จะบันทึก <strong class="text-indigo-300">Log การแปลทั้งหมด</strong> ตั้งแต่เริ่มเปิดโปรแกรม ในรูปแบบ <strong class="text-cyan-300">Chat Bubble</strong> สมัยใหม่ ช่วยให้ย้อนกลับไปอ่านเนื้อเรื่องหรือบทพูดที่อาจจะพลาดไปได้ง่ายๆ</p>
+                            
+                            <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                                <h4 class="text-lg font-semibold text-yellow-300 mb-3">✨ ฟีเจอร์เด่นของ LOG:</h4>
+                                <ul class="text-gray-300 space-y-2 text-base">
+                                    <li>• <strong class="text-cyan-300">Chat Bubble Interface:</strong> แสดงบทสนทนาแบบ modern chat</li>
+                                    <li>• <strong class="text-indigo-300">ปรับฟอนต์ไดนามิก:</strong> ขนาด 10-28pt ปรับได้ตามต้องการ</li>
+                                    <li>• <strong class="text-purple-300">4 ระดับความโปร่งใส:</strong> A/B/C/D โปร่งใสหรือทึบได้</li>
+                                    <li>• <strong class="text-emerald-300">Reverse Mode:</strong> เรียงใหม่ไปเก่า หรือ เก่าไปใหม่</li>
+                                    <li>• <strong class="text-orange-300">Smooth Animations:</strong> เลื่อนดูประวัติแบบลื่นไหล 60fps</li>
+                                    <li>• <strong class="text-red-300">Color Coding:</strong> สีแตกต่างตามประเภทผู้พูด (ปกติ/ระบบ/ไม่รู้จัก)</li>
+                                </ul>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm italic">💡 รองรับรูปแบบข้อความทุกประเภท: บทสนทนาปกติ, ข้อความระบบ, ตัวเลือกคำตอบ และผู้พูดที่ไม่รู้จัก พร้อมระบบลากเพื่อย้ายหน้าต่างและปรับขนาดได้</p>
                         </div>
                     </div>
                 </div>
@@ -940,11 +1074,48 @@
                 <div class="bg-slate-800 bg-opacity-80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8 items-center">
                         <div class="lg:w-1/2">
-                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750254335/MBB_site_npc_rzupz2.png" alt="NPC Manager" class="w-full rounded-lg border-2 border-indigo-500 shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750254335/MBB_site_npc_rzupz2.png" alt="NPC Manager" class="w-full rounded-lg hover:scale-110 transition-transform cursor-pointer program-ui-image">
                         </div>
                         <div class="lg:w-1/2 flex flex-col justify-center">
-                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">NPC Manager</h3>
-                            <p class="text-gray-300 text-xl leading-relaxed">ฟีเจอร์สุดล้ำ! ช่วยให้ AI <strong class="text-indigo-300">รู้จักและจดจำตัวละคร</strong>ในเกม กำหนดชื่อ, เพศ, สรรพนาม และลักษณะการพูดเฉพาะตัว ทำให้การแปลชื่อและคำพูด <strong class="text-indigo-300">ถูกต้อง แม่นยำ และมีชีวิตชีวา</strong> เหมือนมีคนแปลจริงๆ!</p>
+                            <h3 class="text-4xl font-bold mb-6 text-indigo-200">NPC Manager - ระบบแปลอัจฉริยะ</h3>
+                            <p class="text-gray-300 text-xl mb-4 leading-relaxed">สุดยอดการแปลที่เป็นธรรมชาติให้ทุกตัวละครมีชีวิตและมีมิติ ทำให้ AI <strong class="text-indigo-300">รู้จักและจดจำตัวละคร</strong>ในเกม สร้างประสบการณ์การแปลที่เหมือนซับไตเติลคุณภาพสูง</p>
+                            
+                            <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                                <h4 class="text-lg font-semibold text-yellow-300 mb-3">👤 ข้อมูลตัวละคร:</h4>
+                                <ul class="text-gray-300 space-y-2 text-base">
+                                    <li>• <strong class="text-indigo-300">ชื่อและนามสกุล:</strong> บันทึกชื่อเต็มและชื่อเล่น</li>
+                                    <li>• <strong class="text-pink-300">เพศและสรรพนาม:</strong> กำหนดเพศและคำสรรพนาม</li>
+                                    <li>• <strong class="text-emerald-300">บุคลิกการพูด:</strong> สุภาพ, ห้วน, ฉลาด, ก้าวร้าว</li>
+                                    <li>• <strong class="text-orange-300">Role ในเกม:</strong> หลัก, รอง, ประกอบ, ศัตรู</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-emerald-900 bg-opacity-40 rounded-lg p-3 mb-4">
+                                <h4 class="text-emerald-300 font-bold text-base mb-2">🧠 Enhanced Speaker Detection:</h4>
+                                <p class="text-emerald-200 text-sm leading-relaxed">มีระบบตรวจสอบเพื่อการแปลที่แม่นยำตามบริบทของตัวละคร ช่วยให้ทุกข้อความมีชื่อผู้พูดที่ถูกต้อง ไม่มีการหลุดแปลหรือผู้พูดที่ไม่รู้จัก</p>
+                            </div>
+                            
+                            <div class="bg-purple-900 bg-opacity-50 rounded-lg p-3 mb-4">
+                                <h4 class="text-purple-300 font-bold text-base mb-2">🎭 แปลตามบุคลิกที่เรากำหนด:</h4>
+                                <p class="text-purple-200 text-sm leading-relaxed">ระบบปรับการใช้สรรพนามและน้ำเสียงตามบุคลิกของแต่ละตัวละคร เช่น ตัวละครสุภาพจะใช้ "คุณ" "ท่าน" ส่วนตัวละครห้วนจะพูดตรงไปตรงมา ทำให้การแปลเป็นธรรมชาติ</p>
+                            </div>
+                            
+                            <!-- ฟีเจอร์ลับ - ให้เด่นพิเศษ -->
+                            <div class="bg-gradient-to-r from-red-900/80 to-pink-900/80 rounded-lg p-4 mb-3 border-2 border-red-400/50 shadow-lg shadow-red-500/30">
+                                <h4 class="text-red-300 font-bold text-lg mb-3 flex items-center">
+                                    <i class="fas fa-crown mr-2 text-yellow-400"></i>
+                                    🔥 ฟีเจอร์ลับ - ปรับบุคลิกตัวละครได้เอง!
+                                </h4>
+                                <p class="text-red-100 text-sm leading-relaxed mb-3">คุณสามารถ <strong class="text-yellow-300">ปรับบุคลิกของแต่ละตัวละครตามที่คุณชอบ</strong> ได้ผ่าน NPC Manager ในส่วนของ <strong class="text-cyan-300">Roles</strong> ซึ่งควบคุมน้ำเสียงของแต่ละตัวละครอย่างอิสระ!</p>
+                                <div class="bg-black/30 rounded p-3">
+                                    <p class="text-yellow-200 text-xs font-semibold">💡 Tips การใช้งาน:</p>
+                                    <p class="text-red-200 text-xs mt-1">1. เพิ่มข้อมูลจาก <strong>Main Character</strong> ก่อน<br>
+                                    2. สร้างใน <strong>Roles</strong> โดยใช้ชื่อตัวละครให้ตรงกัน<br>
+                                    3. ปรับบุคลิกตามที่ต้องการ แล้วเพลิดเพลินกับการแปลที่เป็นเอกลักษณ์!</p>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm italic">💡 ใช้ได้กับเกมอื่น เพียงสลับฐานข้อมูล NPC.json หรือสร้างใหม่ ทำให้การแปลคุณภาพสูงไม่จำกัดเกม</p>
                         </div>
                     </div>
                 </div>
