@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magicite Babel - แปลภาษาเกมแบบเรียลไทม์</title>
-    <!-- Tailwind CSS v3.4.1 via Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -140,30 +139,61 @@
 
         .main-splash {
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 0;
+            padding-top: 2rem; /* Adjusted padding-top */
+            padding-bottom: 25%; /* Use padding-bottom for aspect ratio, adjust as needed based on content aspect ratio */
             background: linear-gradient(to bottom, #060d1a 0%, rgba(15, 27, 71, 0.8) 100%);
             position: relative;
             overflow: hidden;
             margin-bottom: -40px;
+            min-height: 250px; /* Added min-height for smaller screens */
         }
         
-        .main-splash-image {
+        .main-splash-image, .main-splash-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
             width: auto;
-            max-width: 70%;
+            max-height: 100%;
             height: auto;
             filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.9));
             animation: float 6s ease-in-out infinite;
-            position: relative;
             z-index: 2;
+            transition: opacity 3s ease-in-out;
+        }
+
+        .main-splash-video {
+            opacity: 1; /* Video starts visible */
+            transform: translate(-50%, -50%) scale(0.9); /* Video 10% smaller */
+        }
+
+        .main-splash-video.dissolving {
+            opacity: 0;
+        }
+
+        .main-splash-image {
+            opacity: 0; /* Image starts hidden */
+        }
+
+        .main-splash-image.fade-in {
+            opacity: 1; /* Image fades in smoothly */
+        }
+
+        .main-splash-video.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         
+        .main-splash-image.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+            0% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-15px); }
+            100% { transform: translate(-50%, -50%) translateY(0px); }
         }
         
         .glow-aura {
@@ -252,13 +282,12 @@
 <body>
     <div id="particles-container" class="fixed inset-0 -z-10 pointer-events-none"></div>
 
-    <!-- Main Splash Section -->
     <div class="main-splash">
         <div class="glow-aura"></div>
-        <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1749997265/mdxx0eud4e0zzp3or3nc.png" alt="Magicite Babel Splash" class="main-splash-image">
+        <video id="splash-video" class="main-splash-video" src="https://res.cloudinary.com/docoo51xb/video/upload/v1751890004/mbb_opening_13s_A_oatjtv.mp4" muted autoplay playsinline></video>
+        <img id="splash-image" src="https://res.cloudinary.com/docoo51xb/image/upload/v1749997265/mdxx0eud4e0zzp3or3nc.png" alt="Magicite Babel Splash" class="main-splash-image">
     </div>
     
-    <!-- Hero Section -->
     <header class="hero-gradient py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-8">
             <div class="flex flex-col lg:flex-row items-center justify-between">
@@ -282,7 +311,6 @@
         </div>
     </header>
 
-    <!-- Slideshow Section -->
     <section class="py-16 md:py-24 dark-section">
         <div class="container mx-auto px-4 md:px-8">
             <h2 class="text-2xl md:text-3xl font-semibold text-center text-indigo-200 mb-8">กระบวนการประมวลผล และแปลภาษาอัตโนมัติ</h2>
@@ -310,7 +338,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="py-16 md:py-24 dark-section">
         <div class="container mx-auto px-4 md:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">ฟีเจอร์เด่น</h2>
@@ -325,7 +352,6 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
     <section id="how-to-use" class="py-16 md:py-24 hero-gradient relative">
         <div class="container mx-auto px-4 md:px-8">
             <div class="text-center mb-12 relative">
@@ -333,7 +359,6 @@
                 <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1749997680/512px_icon_wqknxl.ico" alt="มิโคเต้" class="miqote-icon inline-block ml-3 align-top" style="width: 100px; height: auto;">
             </div>
             <div class="mt-12 flex flex-col gap-16">
-                <!-- Step 1 -->
                 <div class="step-container relative">
                     <div class="bg-slate-800/80 rounded-xl p-6 max-w-5xl mx-auto">
                         <div class="flex flex-col md:flex-row gap-8 items-center">
@@ -342,7 +367,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Step 2 -->
                 <div class="step-container">
                     <div class="bg-slate-800/80 rounded-xl p-6 max-w-5xl mx-auto">
                         <div class="flex flex-col md:flex-row gap-8 items-center">
@@ -351,7 +375,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Step 3 -->
                 <div class="step-container">
                     <div class="bg-slate-800/80 rounded-xl p-6 max-w-5xl mx-auto">
                         <div class="flex flex-col md:flex-row gap-8 items-center">
@@ -364,40 +387,34 @@
         </div>
     </section>
 
-    <!-- UI Showcase Section -->
     <section class="py-16 md:py-24 dark-section">
         <div class="container mx-auto px-4 md:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">หน้าตาโปรแกรม</h2>
             <div class="space-y-16 mt-12">
-                <!-- Main UI -->
                 <div class="bg-slate-800/80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8">
                         <div class="lg:w-1/2 flex justify-center"><div class="relative w-[90%]"><img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750822445/MBB_site_MBB_to_mini_g6e8ir.png" alt="Main UI" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image floating-image"></div></div>
                         <div class="lg:w-1/2 flex flex-col justify-center"><h3 class="text-4xl font-bold mb-6 text-indigo-200">หน้าต่างหลัก & โหมดมินิ</h3><p class="text-gray-300 text-xl mb-4 leading-relaxed">ศูนย์กลางการควบคุมหลักที่เชื่อมต่อทุกฟีเจอร์ เป็นจุดเริ่มต้นสำหรับการใช้งานทั้งหมด</p><div class="bg-slate-700 rounded-lg p-4 mb-4"><h4 class="text-lg font-semibold text-yellow-300 mb-3">🎛️ ปุ่มควบคุมหลัก:</h4><ul class="text-gray-300 space-y-2 text-base"><li>• <strong class="text-red-400">START:</strong> เริ่ม-หยุดการแปล <span class="text-cyan-300">(hotkey F9)</span></li><li>• <strong class="text-indigo-200">TUI:</strong> เปิด-ปิดหน้าต่างผลการแปล</li><li>• <strong class="text-indigo-200">LOG:</strong> เปิดประวัติการแปลแบบ Chat Bubble</li><li>• <strong class="text-cyan-300">CON:</strong> Control UI ศูนย์ควบคุมพื้นที่และ Preset</li><li>• <strong class="text-indigo-200">MINI:</strong> สลับเป็นโหมดย่อเพื่อประหยัดพื้นที่</li></ul></div><div class="bg-purple-900/50 rounded-lg p-3 mb-3"><h4 class="text-purple-300 font-bold text-base mb-2">✨ ฟีเจอร์พิเศษ:</h4><ul class="text-purple-200 text-sm space-y-1"><li>• <strong>UI Position Memory:</strong> จำตำแหน่งหน้าต่างทุกตัว</li><li>• <strong>Theme Synchronization:</strong> ธีมเปลี่ยนพร้อมกันทุก UI</li><li>• <strong>Settings & Font Manager:</strong> ปุ่มด้านล่างสำหรับตั้งค่า</li></ul></div><p class="text-gray-400 text-sm italic">💡 โหมดมินิมีไอคอน expand.png สวยงามและความโปร่งใส 90% จำตำแหน่งถาวร</p></div>
                     </div>
                 </div>
-                <!-- TUI -->
                 <div class="bg-slate-800/80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="text-center mb-8"><h3 class="text-4xl font-bold mb-6 text-indigo-200">ผลลัพธ์การแปล (TUI)</h3><p class="text-gray-300 text-xl mb-6 max-w-4xl mx-auto leading-relaxed">หน้าต่างแสดงผลการแปลจาก AI ที่อ่านง่าย ชัดเจน พร้อมระบุชื่อตัวละคร (ถ้ามี) ด้วยความฉลาดของ <strong class="text-indigo-300">NPC Manager</strong> ที่ช่วยให้การแปลสม่ำเสมอและตรงคาแรกเตอร์</p></div>
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8"><div class="bg-slate-700 rounded-lg p-4"><h4 class="text-lg font-semibold text-cyan-300 mb-3">🎨 การแสดงผล:</h4><ul class="text-gray-300 space-y-2 text-sm"><li>• <strong class="text-indigo-300">Font Manager:</strong> ปรับฟอนต์และขนาดได้เต็มที่</li><li>• <strong class="text-purple-300">Color Picker:</strong> เลือกสี/ความโปร่งใสพื้นหลัง</li><li>• <strong class="text-emerald-300">Lock Modes:</strong> ล็อค-ปลดล็อคตำแหน่ง</li><li>• <strong class="text-orange-300">Fade Out:</strong> จางหายอัตโนมัติเมื่อไม่มีข้อความใหม่</li></ul></div><div class="bg-slate-700 rounded-lg p-4"><h4 class="text-lg font-semibold text-red-300 mb-3">⚡ Force Translation:</h4><ul class="text-gray-300 space-y-2 text-sm"><li>• <strong class="text-red-400">คลิกขวา:</strong> บนพื้นหลัง TUI ตำแหน่งใดก็ได้</li><li>• <strong class="text-red-400">ปุ่ม F:</strong> เปิดโหมด "แตะเมาส์เพื่อแปลซ้ำ"</li><li>• <strong class="text-cyan-300">Control UI:</strong> กดปุ่ม FORCE โดยตรง</li><li>• <strong class="text-yellow-300">ความยืดหยุ่น:</strong> เลือกวิธีที่ถนัด</li></ul></div><div class="bg-slate-700 rounded-lg p-4"><h4 class="text-lg font-semibold text-indigo-300 mb-3">🔧 โหมดการทำงาน:</h4><ul class="text-gray-300 space-y-2 text-sm"><li>• <strong class="text-cyan-300">มีพื้นหลัง+ปลดล็อค:</strong> ปรับตำแหน่งได้</li><li>• <strong class="text-cyan-300">ซ่อนพื้นหลัง+Lock:</strong> โปร่งใส คงที่</li><li>• <strong class="text-cyan-300">มีพื้นหลัง+Lock:</strong> มีพื้นหลัง คงที่</li><li>• <strong class="text-purple-300">Dynamic Toggle:</strong> สลับโหมดได้ทันที</li></ul></div></div>
                     <div class="relative max-w-5xl mx-auto"><img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750823862/MBB_site_TUI_xqqpva.png" alt="Translation Result" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image"></div>
                     <div class="mt-6 bg-gradient-to-r from-indigo-900/50 to-purple-900/30 rounded-lg p-4 border border-indigo-400/30"><h4 class="text-indigo-300 font-bold text-lg mb-2">🎯 การทำงานอัจฉริยะ:</h4><p class="text-gray-300 text-base leading-relaxed">ระบบ <strong class="text-yellow-300">Enhanced Speaker Detection 5 ขั้นตอน</strong> ช่วยให้ทุกข้อความมีชื่อผู้พูดที่แม่นยำ พร้อม <strong class="text-indigo-300">Quality Gate System</strong> ป้องกันการหลุดแปล และ <strong class="text-emerald-300">Pronoun Rules</strong> ที่ปรับตามบุคลิกตัวละคร ทำให้การแปลเป็นธรรมชาติเหมือนซับไตเติลมืออาชีพ</p></div>
                 </div>
-                <!-- Control UI -->
                 <div class="bg-slate-800/80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8 items-center">
-                        <div class="lg:w-1/3"><img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750823865/MBB_site_CON_vs0s6e.png" alt="Control UI" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image"></div>
+                        <div class="lg:w-1/3"><img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750823860/MBB_site_MBB_swpkse.png" alt="Control UI" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image"></div>
                         <div class="lg:w-2/3"><h3 class="text-4xl font-bold mb-6 text-indigo-200">Control UI - ศูนย์ควบคุมทุกฟีเจอร์</h3><p class="text-gray-300 text-xl mb-4 leading-relaxed">แผงควบคุมที่รวมฟีเจอร์สำคัญทั้งหมด! ออกแบบมาให้ใช้งานง่าย มีทุกสิ่งที่ต้องการในที่เดียว</p><div class="bg-slate-700 rounded-lg p-4 mb-4"><h4 class="text-lg font-semibold text-yellow-300 mb-3">🎯 ฟังก์ชันหลัก:</h4><ul class="text-gray-300 space-y-2 text-base"><li>• <strong class="text-indigo-300">Preset (1-6):</strong> สลับชุดการตั้งค่าได้รวดเร็ว</li><li>• <strong class="text-indigo-300">Area A/B/C:</strong> เลือกและกำหนดพื้นที่แปล</li><li>• <strong class="text-red-400">FORCE:</strong> บังคับแปลซ้ำทันที</li><li>• <strong class="text-emerald-300">SAVE/LOAD:</strong> บันทึกและโหลด Preset</li><li>• <strong class="text-orange-300">SHOW/HIDE:</strong> แสดง-ซ่อนพื้นที่ที่เลือก</li></ul></div><div class="bg-emerald-900/40 rounded-lg p-3 mb-3"><h4 class="text-emerald-300 font-bold text-base mb-2">🔒 System Presets (1-3) มีข้อจำกัดอัจฉริยะ:</h4><ul class="text-emerald-200 text-sm space-y-1"><li>• <strong>Preset 1 (Dialog):</strong> จำกัดให้ใช้เฉพาะ Area A+B</li><li>• <strong>Preset 2 (Lore):</strong> จำกัดให้ใช้เฉพาะ Area C</li><li>• <strong>Preset 3 (Choice):</strong> จำกัดให้ใช้เฉพาะ Area A+B</li><li>• <strong>Preset 4-6 (Custom):</strong> ไร้ขีดจำกัด ใช้ได้ทุก Area</li></ul></div><div class="bg-purple-900/50 rounded-lg p-3 mb-3"><h4 class="text-purple-300 font-bold text-base mb-2">✨ ฟีเจอร์ขั้นสูง:</h4><ul class="text-purple-200 text-sm space-y-1"><li>• <strong>Modern Tooltips:</strong> ชี้เมาส์เพื่อดูคำอธิบายทุกปุ่ม</li><li>• <strong>CPU Limit:</strong> ปรับตามประสิทธิภาพเครื่อง</li><li>• <strong>Toggle Switches:</strong> เปิด-ปิด manual-click และ hover area</li><li>• <strong>RESET Button:</strong> รีเซ็ตพิกัดทั้งระบบ (คลิกค้าง 3 วินาที)</li></ul></div><p class="text-gray-400 text-sm italic">💡 มีขอบโค้งมนสวยงาม ระบบป้องกันการกดผิด และ Rounded Corners UI เหมือน MBB</p></div>
                     </div>
                 </div>
-                <!-- LOG UI -->
                 <div class="bg-slate-800/80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8 items-center">
                         <div class="lg:w-1/3 w-[30%]"><img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750823861/MBB_site_LOG_d8iobf.png" alt="Translation History" class="w-full rounded-lg hover:scale-105 transition-transform cursor-pointer program-ui-image"></div>
                         <div class="lg:w-2/3 flex flex-col justify-center"><h3 class="text-4xl font-bold mb-6 text-indigo-200">ประวัติการแปล (LOG)</h3><p class="text-gray-300 text-xl leading-relaxed mb-4">ไม่พลาดทุกบทสนทนา! หน้าต่างนี้จะบันทึก <strong class="text-indigo-300">Log การแปลทั้งหมด</strong> ตั้งแต่เริ่มเปิดโปรแกรม ในรูปแบบ <strong class="text-cyan-300">Chat Bubble</strong> สมัยใหม่ ช่วยให้ย้อนกลับไปอ่านเนื้อเรื่องหรือบทพูดที่อาจจะพลาดไปได้ง่ายๆ</p><div class="bg-slate-700 rounded-lg p-4 mb-4"><h4 class="text-lg font-semibold text-yellow-300 mb-3">✨ ฟีเจอร์เด่นของ LOG:</h4><ul class="text-gray-300 space-y-2 text-base"><li>• <strong class="text-cyan-300">Chat Bubble Interface:</strong> แสดงบทสนทนาแบบ modern chat</li><li>• <strong class="text-indigo-300">ปรับฟอนต์ไดนามิก:</strong> ขนาด 10-28pt ปรับได้ตามต้องการ</li><li>• <strong class="text-purple-300">4 ระดับความโปร่งใส:</strong> A/B/C/D โปร่งใสหรือทึบได้</li><li>• <strong class="text-emerald-300">Reverse Mode:</strong> เรียงใหม่ไปเก่า หรือ เก่าไปใหม่</li><li>• <strong class="text-orange-300">Smooth Animations:</strong> เลื่อนดูประวัติแบบลื่นไหล 60fps</li><li>• <strong class="text-red-300">Color Coding:</strong> สีแตกต่างตามประเภทผู้พูด (ปกติ/ระบบ/ไม่รู้จัก)</li></ul></div><p class="text-gray-400 text-sm italic">💡 รองรับรูปแบบข้อความทุกประเภท: บทสนทนาปกติ, ข้อความระบบ, ตัวเลือกคำตอบ และผู้พูดที่ไม่รู้จัก พร้อมระบบลากเพื่อย้ายหน้าต่างและปรับขนาดได้</p></div>
                     </div>
                 </div>
-                <!-- NPC Manager -->
                 <div id="npc-manager" class="bg-slate-800/80 rounded-xl shadow-xl p-8 border border-indigo-500/30">
                     <div class="flex flex-col lg:flex-row gap-8 items-center">
                         <div class="lg:w-1/2"><img src="https://res.cloudinary.com/docoo51xb/image/upload/v1750824104/MBB_site_npc_rvkyp4.png" alt="NPC Manager" class="w-full rounded-lg hover:scale-110 transition-transform cursor-pointer program-ui-image"></div>
@@ -408,7 +425,6 @@
         </div>
     </section>
 
-    <!-- Latest Updates Section -->
     <section id="latest-updates" class="py-16 md:py-24 hero-gradient">
         <div class="container mx-auto px-4 md:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white">อัปเดตล่าสุด</h2>
@@ -421,16 +437,13 @@
         </div>
     </section>
 
-    <!-- Game Support & Download Section -->
     <section class="py-16 md:py-24 dark-section">
         <div class="container mx-auto px-4 md:px-8">
             <div class="flex flex-col lg:flex-row gap-8 xl:gap-12">
-                <!-- Game Support -->
                 <div class="lg:w-1/2 bg-slate-800/60 p-8 rounded-xl border border-indigo-500/30 shadow-lg">
                     <h2 class="text-3xl md:text-4xl font-bold text-center section-title text-white mb-12">รองรับเกม</h2>
                     <div class="text-center"><div class="inline-block bg-indigo-600 text-white px-6 py-4 rounded-lg text-lg font-semibold mb-4 shadow-lg shadow-indigo-500/40">FFXIV (รองรับเต็มระบบ)</div><p class="text-lg text-gray-400 mb-6">เกมส์ที่รองรับและได้รับการทดสอบแล้ว:</p><div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto"><div class="bg-indigo-900/50 p-4 rounded-lg border border-indigo-500 shadow-md hover:shadow-indigo-500/40 transition-all"><div class="text-indigo-300 font-semibold">Wuthering Waves</div></div><div class="bg-indigo-900/50 p-4 rounded-lg border border-indigo-500 shadow-md hover:shadow-indigo-500/40 transition-all"><div class="text-indigo-300 font-semibold">Monster Hunter Wilds</div></div><div class="bg-indigo-900/50 p-4 rounded-lg border border-indigo-500 shadow-md hover:shadow-indigo-500/40 transition-all"><div class="text-indigo-300 font-semibold">เกมส์อื่นๆ อีกมากมาย</div></div></div><p class="text-sm text-gray-400 mt-6 italic">หมายเหตุ: เกมส์ที่มีกล่องข้อความบทสนทนาที่มีพื้นหลังชัดเจนจะแปลได้มีคุณภาพมากที่สุด</p></div>
                 </div>
-                <!-- Download -->
                 <div id="download" class="lg:w-1/2 bg-slate-800/60 p-8 rounded-xl border border-indigo-500/30 shadow-lg flex flex-col justify-center">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white text-center">พร้อมจะเปลี่ยนประสบการณ์เกมของคุณแล้วหรือยัง?</h2>
                     <p class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto text-center">ดาวน์โหลด Magicite Babel เวอร์ชั่นล่าสุดและเริ่มต้นสัมผัสเนื้อเรื่องเกมที่คุณรักได้ลึกซึ้งยิ่งขึ้น</p>
@@ -447,19 +460,16 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 py-12 border-t border-gray-800">
         <div class="container mx-auto px-4 md:px-8">
             <div class="mb-12">
                 <div class="flex flex-col lg:flex-row gap-6">
-                    <!-- Disclaimer -->
                     <div class="lg:w-[70%]">
                         <div class="bg-slate-800/80 rounded-xl shadow-xl p-6 border border-indigo-900 h-full">
                             <h2 class="text-2xl font-semibold text-center text-indigo-200 mb-4">ข้อมูลสำคัญเกี่ยวกับโปรแกรม</h2>
                             <div class="text-gray-300 space-y-4"><p class="text-center text-lg font-medium text-indigo-100 mb-4">Magicite Babel ทำงานอย่างปลอดภัยและสอดคล้องตามกฎของเกม</p><p>โปรแกรม Magicite Babel <strong class="text-indigo-200">ไม่ใช่ plug-in หรือ mod ของเกม</strong> แต่อย่างใด โปรแกรมนี้ทำงานแยกต่างหากจากตัวเกมโดยสมบูรณ์ ด้วยการทำงานในลักษณะ "อ่านภาพหน้าจอ" จากนั้นประมวลผลและแสดงผลแยกต่างหากจากตัวเกม</p><p>กระบวนการทำงานคือ:</p><ol class="list-decimal pl-6 space-y-2"><li>ถ่ายภาพหน้าจอในบริเวณที่ผู้ใช้กำหนด (ไม่มีการแทรกแซงไฟล์ใดๆ ของเกม)</li><li>ส่งภาพไปประมวลผล OCR เพื่อแปลงเป็นข้อความ</li><li>ส่งข้อความไปแปลด้วย AI ภายนอก</li><li>แสดงผลในหน้าต่างแยกต่างหาก</li></ol><p class="mt-4">การทำงานในลักษณะนี้ <strong class="text-indigo-200">ไม่มีความเสี่ยงในการละเมิดกฎของเกม</strong> เนื่องจากเป็นเพียงการอ่านภาพหน้าจอและแสดงผลแยกต่างหาก ไม่มีการดัดแปลงไฟล์เกม ไม่มีการเข้าถึงข้อมูลภายในเกม และไม่ได้ให้ความได้เปรียบในการเล่นเกมแต่อย่างใด</p><p class="mt-4 text-indigo-100">โปรแกรมนี้พัฒนาขึ้นด้วยความรักและชื่นชมในเกม Final Fantasy XIV เพื่อช่วยให้ผู้เล่นชาวไทยได้เข้าถึงเนื้อเรื่องอันลึกซึ้งและสัมผัสอารมณ์ความรู้สึกของตัวละครได้อย่างครบถ้วน ช่วยเพิ่มอรรถรสในการเล่นเกม ขยายฐานผู้เล่น และสนับสนุนคอมมูนิตี้ FFXIV ในประเทศไทยให้เติบโตยิ่งขึ้น</p></div>
                         </div>
                     </div>
-                    <!-- FAQ / Setup Guide -->
                     <div class="lg:w-[30%]">
                         <div class="bg-slate-800/80 rounded-xl shadow-xl p-6 border border-indigo-900 h-full">
                             <h2 class="text-2xl font-semibold text-center text-indigo-200 mb-4">คำแนะนำการตั้งค่าครั้งแรก</h2>
@@ -477,7 +487,6 @@
         </div>
     </footer>
 
-    <!-- Image Zoom Modal -->
     <div id="imageModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center hidden">
         <div class="relative max-w-4xl max-h-screen p-2">
             <img id="modalImage" src="" alt="Zoomed Image" class="max-h-[90vh] max-w-full">
@@ -485,7 +494,6 @@
         </div>
     </div>
     
-    <!-- Patch Notes Modal -->
     <div id="patchNotesModal" class="fixed inset-0 bg-black/90 z-50 flex items-start justify-center hidden overflow-y-auto py-8">
         <div class="relative bg-slate-800 max-w-4xl w-full mx-4 md:mx-auto rounded-xl shadow-2xl border border-indigo-500 max-h-[90vh] my-4">
             <div class="sticky bg-slate-800 border-b border-indigo-500 p-4 flex items-center justify-between">
@@ -498,12 +506,10 @@
         </div>
     </div>
     
-    <!-- Jump to Top Button -->
     <button id="jumpToTop" class="jump-to-top-btn" title="กลับไปด้านบน">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Particle Animation
@@ -543,6 +549,43 @@
                     for (let i = 0; i < particleCount; i++) createParticle();
                 });
             }
+
+            // Splash Video to Image Transition
+            const splashVideo = document.getElementById('splash-video');
+            const splashImage = document.getElementById('splash-image');
+
+            if (splashVideo && splashImage) {
+                // Set up video duration tracking for smooth dissolve
+                splashVideo.addEventListener('loadedmetadata', () => {
+                    const videoDuration = splashVideo.duration;
+                    const dissolveStartTime = videoDuration - 3; // Start dissolve 3 seconds before end
+                    
+                    splashVideo.addEventListener('timeupdate', () => {
+                        if (splashVideo.currentTime >= dissolveStartTime && !splashVideo.classList.contains('dissolving')) {
+                            // Start dissolve transition 3 seconds before video ends
+                            splashVideo.classList.add('dissolving');
+                            
+                            // Use setTimeout to ensure transition works properly
+                            setTimeout(() => {
+                                splashImage.classList.add('fade-in');
+                            }, 50); // Small delay to ensure CSS transition triggers
+                        }
+                    });
+                });
+
+                splashVideo.addEventListener('ended', () => {
+                    // Ensure video is fully hidden after ending
+                    splashVideo.classList.add('hidden');
+                });
+
+                // Fallback: In case video doesn't play for some reason
+                splashVideo.play().catch(error => {
+                    console.warn("Autoplay was prevented. Showing image instead.", error);
+                    splashVideo.classList.add('hidden');
+                    splashImage.classList.add('fade-in');
+                });
+            }
+
 
             // Modal Controls (Image Zoom and Patch Notes)
             const setupModal = (modalId, openTriggers, closeTriggers) => {
