@@ -30,6 +30,72 @@
             min-height: 100vh;
         }
         
+        /* Image Lightbox Styles */
+        .image-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .image-lightbox.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 1rem;
+            border: 2px solid var(--primary-color-1);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-lightbox.visible .lightbox-content {
+            transform: scale(1);
+        }
+
+        .image-container-lightbox { 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .image-container-lightbox::after { 
+            content: '\f00e'; 
+            font-family: 'Font Awesome 6 Free'; 
+            font-weight: 900; 
+            position: absolute; 
+            bottom: 1rem; 
+            right: 1rem; 
+            background-color: rgba(79, 70, 229, 0.8); 
+            color: white; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1rem; 
+            opacity: 0; 
+            transition: opacity 0.3s; 
+        }
+        .image-container-lightbox:hover::after { 
+            opacity: 1; 
+        }
+        
         /* Animated Background */
         .animated-bg {
             position: fixed;
@@ -710,24 +776,14 @@
     <section id="download" class="py-16 md:py-24">
         <div class="container mx-auto px-4 md:px-8">
             <div class="flex flex-col lg:flex-row gap-8 xl:gap-12">
-                <!-- Left Column: API and Supported Games -->
+                <!-- Left Column: Installation and Supported Games -->
                 <div class="lg:w-1/2 glass-card p-8 flex flex-col">
-                    <!-- API Key Section -->
-                    <div id="api-key-guide" class="mb-8 text-center">
-                        <h4 class="text-yellow-300 font-bold text-2xl mb-4">🔑 การรับ Gemini API Key</h4>
-                        <p class="text-gray-300 text-lg leading-relaxed mb-4">จำเป็นต้องมี Gemini API Key ในการใช้งาน สามารถรับได้ฟรีจาก Google AI Studio</p>
-                        <div class="glass-card !bg-slate-800/20 !border-slate-500/20 p-4 mb-4 text-left">
-                            <h5 class="text-indigo-300 font-semibold text-lg mb-3">📝 ขั้นตอนการตั้งค่า:</h5>
-                            <ol class="text-gray-300 text-base space-y-3 mb-4 list-decimal list-inside">
-                                <li>ไปที่ Google AI Studio</li>
-                                <li>คัดลอก API Key ที่ได้รับ</li>
-                                <li>นำ API Key ไปใส่ในไฟล์ <span class="text-yellow-300 font-mono">.env</span></li>
-                            </ol>
-                            <div class="glass-card !bg-black/20 p-3">
-                                <code class="text-yellow-300 text-sm">GEMINI_API_KEY=วาง_API_Key_ตรงนี้</code>
-                            </div>
+                    <!-- First Installation Section -->
+                    <div id="installation-guide" class="mb-8 text-center">
+                        <h4 class="text-white font-bold text-2xl mb-4">การติดตั้งครั้งแรก</h4>
+                        <div class="cursor-pointer image-container-lightbox">
+                            <img src="https://res.cloudinary.com/docoo51xb/image/upload/v1754810544/MBBv9_first_start_wfkgup.png" alt="คู่มือการติดตั้งครั้งแรก" class="w-full h-auto rounded-lg static-image">
                         </div>
-                        <a href="https://aistudio.google.com/app/apikey" target="_blank" class="btn-liquid mt-4 inline-block"><span><i class="fas fa-key mr-2"></i>รับ API Key</span></a>
                     </div>
                     
                     <!-- Supported Games Section -->
@@ -758,28 +814,35 @@
                     
                     <div class="text-center mb-6">
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLScUaGT4VTcAb__oupReSR6yjhgnuDjsngOoBj3pOe2lFWbqCQ/viewform" target="_blank" rel="noopener noreferrer" class="btn-liquid !bg-purple-600 hover:!bg-purple-700 text-xl px-8 py-4">
-                        <span><i class="fas fa-download mr-2"></i>ขอเข้าร่วมทดสอบ Beta</span>
-                    </a>
-                    <p class="text-base text-gray-400 mt-8">โดยเฉพาะผู้เล่น FFXIV ที่ต้องการสัมผัสเนื้อเรื่องอย่างลึกซึ้ง<br>เราพร้อมแนะนำการติดตั้งและการใช้งานเป็นพิเศษ</p>
-                </div>
+                            <span><i class="fas fa-download mr-2"></i>ขอเข้าร่วมทดสอบ Beta</span>
+                        </a>
+                        <p class="text-base text-gray-400 mt-8">โดยเฉพาะผู้เล่น FFXIV ที่ต้องการสัมผัสเนื้อเรื่องอย่างลึกซึ้ง<br>เราพร้อมแนะนำการติดตั้งและการใช้งานเป็นพิเศษ</p>
+                    </div>
 
-                <!-- Disclaimer -->
-                <div class="mt-8 glass-card !bg-cyan-500/10 !border-cyan-400/30 p-6">
-                    <div class="flex items-start">
-                        <i class="fas fa-info-circle text-cyan-400 text-2xl mr-4 mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-cyan-200 text-xl mb-2">💡 โปรแกรมนี้ไม่ใช่โปรแกรมช่วยเล่น</h4>
-                            <div class="text-base space-y-2 text-gray-300">
-                                <p><strong class="text-white">Magicite Babel เป็นเครื่องมือช่วยแปลภาษา</strong> ไม่มีส่วนเกี่ยวข้องกับการดัดแปลงไฟล์เกม</p>
-                                <p><strong class="text-white">ปลอดภัยต่อบัญชีเกม:</strong> ไม่ละเมิดกฎของเกมใดๆ เพราะทำงานแยกจากเกมโดยสิ้นเชิง</p>
+                    <!-- Disclaimer -->
+                    <div class="mt-8 glass-card !bg-cyan-500/10 !border-cyan-400/30 p-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-cyan-400 text-2xl mr-4 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-cyan-200 text-xl mb-2">💡 โปรแกรมนี้ไม่ใช่โปรแกรมช่วยเล่น</h4>
+                                <div class="text-base space-y-2 text-gray-300">
+                                    <p><strong class="text-white">Magicite Babel เป็นเครื่องมือช่วยแปลภาษา</strong> ไม่มีส่วนเกี่ยวข้องกับการดัดแปลงไฟล์เกม</p>
+                                    <p><strong class="text-white">ปลอดภัยต่อบัญชีเกม:</strong> ไม่ละเมิดกฎของเกมใดๆ เพราะทำงานแยกจากเกมโดยสิ้นเชิง</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
+    </section>
+
+
+
+    <!-- Image Lightbox Container (Hidden by default) -->
+    <div id="imageLightbox" class="image-lightbox">
+        <img id="lightboxImage" src="" alt="ขยายภาพ" class="lightbox-content">
     </div>
-</section>
 
     <!-- Contact & Footer -->
     <footer class="py-12 hero-glass">
@@ -982,6 +1045,30 @@
             });
         });
 
+        // New Image Lightbox
+        const imageLightbox = document.getElementById('imageLightbox');
+        if (imageLightbox) {
+            const lightboxImage = document.getElementById('lightboxImage');
+            
+            document.querySelectorAll('.image-container-lightbox').forEach(container => {
+                container.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const imgSrc = this.querySelector('img').src;
+                    lightboxImage.src = imgSrc;
+                    imageLightbox.classList.add('visible');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            const closeLightbox = () => {
+                imageLightbox.classList.remove('visible');
+                document.body.style.overflow = '';
+            };
+
+            // Close when the lightbox (background or image) is clicked
+            imageLightbox.addEventListener('click', closeLightbox);
+        }
+        
         // --- SCRIPT END ---
     </script>
 </body>
